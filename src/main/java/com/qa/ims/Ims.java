@@ -21,14 +21,13 @@ import com.qa.ims.utils.Utils;
 public class Ims {
 
 	public static final Logger LOGGER = Logger.getLogger(Ims.class);
-	enum check {STOP};
 	
 	public void imsSystem() {
 		LOGGER.info("Please enter your username: ");
 		String username = Utils.getInput();
 		LOGGER.info("Pease enter your password: ");
 		String password = Utils.getInput();
-
+		// Initialise database connection
 		init(username, password);
 
 		LOGGER.info("Which part of the database would you like to access?");
@@ -52,7 +51,6 @@ public class Ims {
 		case ORDER:
 			break;
 		case STOP:
-			
 			break;
 		default:
 			break;
@@ -60,7 +58,12 @@ public class Ims {
 
 	}
 
+	
+	
+	 public boolean keepGoing = true;
 	public void doAction(CrudController<?> crudController, Action action) {
+	
+		do {
 		switch (action) {
 		case CREATE:
 			crudController.create();
@@ -75,10 +78,14 @@ public class Ims {
 			crudController.delete();
 			break;
 		case RETURN:
+			LOGGER.info("You chose to exit...");
+			keepGoing = false;
 			break;
+			
 		default:
 			break;
 		}
+		} while(keepGoing);
 	}
 
 	/**
@@ -119,14 +126,17 @@ public class Ims {
 			while ((string = br.readLine()) != null) {
 				try (Statement statement = connection.createStatement();) {
 					statement.executeUpdate(string);
+				
 				}
 			}
 		} catch (SQLException | IOException e) {
 			for (StackTraceElement ele : e.getStackTrace()) {
 				LOGGER.debug(ele);
+				
 			}
 			LOGGER.error(e.getMessage());
 		}
 	}
+	
 
 }

@@ -37,10 +37,11 @@ public enum Domain {
 				if (domain == STOP) {
 					LOGGER.info("Exiting the program ... Bye!");
 					System.exit(0);
+					
 				}
 				break;
 			} catch (IllegalArgumentException e) {
-				LOGGER.error("Invalid selection please try again");
+				LOGGER.error("Invalid selection, please try again");
 			}
 		}
 		return domain;

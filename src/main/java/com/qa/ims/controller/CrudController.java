@@ -15,5 +15,6 @@ public interface CrudController<T> {
     T update();
      
     void delete();
+    
 
 }

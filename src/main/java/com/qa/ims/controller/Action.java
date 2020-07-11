@@ -17,6 +17,7 @@ public enum Action {
 	public static final Logger LOGGER = Logger.getLogger(Action.class);
 
 	private String description;
+	private static String utilString;
 
 	private Action() {
 	}
@@ -32,6 +33,7 @@ public enum Action {
 		return this.name() + ": " + this.description;
 	}
 
+	
 	/**
 	 * Prints out all posible actions
 	 */
@@ -51,7 +53,8 @@ public enum Action {
 		Action action;
 		while (true) {
 			try {
-				action = Action.valueOf(Utils.getInput().toUpperCase());
+				utilString = Utils.getInput().toUpperCase();
+				action = Action.valueOf(utilString);
 				break;
 			} catch (IllegalArgumentException e) {
 				LOGGER.error("Invalid selection please try again");
@@ -60,4 +63,8 @@ public enum Action {
 		return action;
 	}
 
+	public static String getStringAction() {
+		LOGGER.info("This time you have chosen: " + utilString);
+		return utilString.toLowerCase();
+	}
 }

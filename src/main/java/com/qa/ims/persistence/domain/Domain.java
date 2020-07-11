@@ -9,7 +9,7 @@ public enum Domain {
 	CUSTOMER("Information about customers"),
 	ITEM("Individual Products"),
 	ORDER("Purchases of items"),
-	STOP("Close the application");
+	EXIT("Close the application");
 	
 	public static final Logger LOGGER = Logger.getLogger(Domain.class);
 
@@ -34,7 +34,7 @@ public enum Domain {
 		while (true) {
 			try {
 				domain = Domain.valueOf(Utils.getInput().toUpperCase());
-				if (domain == STOP) {
+				if (domain == EXIT) {
 					LOGGER.info("Exiting the program ... Bye!");
 					System.exit(0);
 					

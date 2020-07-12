@@ -21,12 +21,11 @@ import com.qa.ims.utils.Utils;
 public class Ims {
 
 	public static final Logger LOGGER = Logger.getLogger(Ims.class);
-	private String check = "return";
+	private String checkReturn = "return";
+	private String checkExit = "exit";
 	private boolean keepGoing = true;
 	private boolean returnToDatabase = true;
-	private boolean returnToAction = true;
 	
-
 	public void imsSystem() {
 		LOGGER.info("Please enter your username: ");
 		String username = Utils.getInput();
@@ -41,7 +40,11 @@ public class Ims {
 			Domain.printDomains();
 
 			Domain domain = Domain.getDomain();
-
+			if (Domain.getStringDomain().equals(checkExit)){
+				closeDb(username, password);
+				LOGGER.info("Exiting the program ... Bye!");
+				System.exit(0);
+			}
 			LOGGER.info("What would you like to do with " + domain.name().toLowerCase() + ":");
 
 			Action.printActions();
@@ -51,68 +54,61 @@ public class Ims {
 			case CUSTOMER:
 				CustomerController customerController = new CustomerController(
 						new CustomerServices(new CustomerDaoMysql(username, password)));
-				do{
-				
-				doAction(customerController, action);
-				
-				Action.printActions();
-				action = Action.getAction();
-				
-				if (Action.getStringAction().equals(check)) {
-					LOGGER.info("Returning to the database selection ... ");
-					keepGoing = false;
-				}
-				
-				}while (keepGoing);
+				do {
+
+					doAction(customerController, action);
+
+					Action.printActions();
+					action = Action.getAction();
+					
+					if (Action.getStringAction().equals(checkExit)){
+						closeDb(username, password);
+					}
+					
+					if (Action.getStringAction().equals(checkReturn)) {
+						LOGGER.info("Returning to the database selection ... ");
+						keepGoing = false;
+					}
+
+				} while (keepGoing);
 				break;
 			case ITEM:
 				break;
 			case ORDER:
 				break;
 			case EXIT:
-				// Add closeDB
 				break;
 			default:
+				returnToDatabase = false;
 				break;
 			}
-		}while (returnToDatabase);
+		} while (returnToDatabase);
 	}
 
-	public boolean returnData(boolean returnToDataBase) {
-
-		return returnToDatabase;
-	}
-
+	
 	public void doAction(CrudController<?> crudController, Action action) {
 
-		
-			switch (action) {
-			case CREATE:
-				crudController.create();
-				break;
-			case READ:
-				crudController.readAll();
-				break;
-			case UPDATE:
-				crudController.update();
-				break;
-			case DELETE:
-				crudController.delete();
-				break;
-			case RETURN:
-				
-				returnData(true);
-				break;
-			case EXIT:
-				LOGGER.info("Exiting...");
-				// add in closeDB method
-				
-				keepGoing = false;
-				break;
-			default:
-				break;
-			}
-	
+		switch (action) {
+		case CREATE:
+			crudController.create();
+			break;
+		case READ:
+			crudController.readAll();
+			break;
+		case UPDATE:
+			crudController.update();
+			break;
+		case DELETE:
+			crudController.delete();
+			break;
+		case RETURN:
+			break;
+		case EXIT:
+			break;
+		default:
+			break;
+		}
+
 	}
 
 	/**
@@ -165,4 +161,29 @@ public class Ims {
 		}
 	}
 
+	/**
+	 * To close the database on user choosing EXIT
+	 */
+	public void closeDb  (String username, String password){
+		closeDb("jdbc:mysql://" + Utils.MYSQL_URL + "/", username, password);
+	}
+	public void closeDb (String jdbcConnectionUrl, String username, String password){
+		Connection connection  = null;
+		try {
+			connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
+		}catch (SQLException e) {
+			
+			LOGGER.error(e.getMessage());
+		}finally {
+			try {
+				if (connection != null) {
+					LOGGER.info("Exiting database...");
+					connection.close();
+				}
+			}catch (SQLException e) {
+				
+				LOGGER.error(e.getMessage());
+			}
+		}
+	}
 }

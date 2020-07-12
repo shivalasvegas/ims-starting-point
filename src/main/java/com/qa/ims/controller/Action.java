@@ -62,9 +62,9 @@ public enum Action {
 		}
 		return action;
 	}
-
+	//To check input in ims class 
 	public static String getStringAction() {
-		LOGGER.info("This time you have chosen: " + utilString);
+		
 		return utilString.toLowerCase();
 	}
 }

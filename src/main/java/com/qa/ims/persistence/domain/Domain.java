@@ -14,6 +14,7 @@ public enum Domain {
 	public static final Logger LOGGER = Logger.getLogger(Domain.class);
 
 	private String description;
+	private static String utilString;
 	
 	private Domain(String description) {
 		this.description = description;
@@ -29,16 +30,14 @@ public enum Domain {
 		}
 	}
 	
+
+	
 	public static Domain getDomain() {
 		Domain domain;
 		while (true) {
 			try {
-				domain = Domain.valueOf(Utils.getInput().toUpperCase());
-				if (domain == EXIT) {
-					LOGGER.info("Exiting the program ... Bye!");
-					System.exit(0);
-					
-				}
+				utilString = Utils.getInput().toUpperCase();
+				domain = Domain.valueOf(utilString);
 				break;
 			} catch (IllegalArgumentException e) {
 				LOGGER.error("Invalid selection, please try again");
@@ -47,5 +46,10 @@ public enum Domain {
 		return domain;
 	}
 	
+	//To check input in ims class 
+	public static String getStringDomain() {
+		
+	return utilString.toLowerCase();
+	}
 	
 }

@@ -26,7 +26,7 @@ public class DomainTest {
 	
 	@Test
 	public void stopTest() {
-		Domain domain = Domain.STOP;
+		Domain domain = Domain.EXIT;
 		assertTrue(domain.getDescription().toLowerCase().contains("close"));
 	}
 

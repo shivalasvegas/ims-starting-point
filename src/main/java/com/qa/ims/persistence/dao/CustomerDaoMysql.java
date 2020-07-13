@@ -35,13 +35,13 @@ public class CustomerDaoMysql implements Dao<Customer> {
 
 	
 	Customer customerFromResultSet(ResultSet resultSet) throws SQLException {
-		Long id = resultSet.getLong("id");
+		Long customer_id = resultSet.getLong("customer_id");
 		String forename = resultSet.getString("forename");
 		String surname = resultSet.getString("surname");
 		String address = resultSet.getString("address");
 		String email = resultSet.getString("email");
 		String password = resultSet.getString("password");
-		return new Customer(id, forename, surname, address, email, password);
+		return new Customer(customer_id, forename, surname, address, email, password);
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class CustomerDaoMysql implements Dao<Customer> {
 	public Customer readLatest() {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM customers ORDER BY id DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM customers ORDER BY customer_id DESC LIMIT 1");) {
 			resultSet.next();
 			return customerFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -89,7 +89,7 @@ public class CustomerDaoMysql implements Dao<Customer> {
 	public Customer create(Customer customer) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("Insert into customers(forename, surname, address, email, password.) values('"
+			statement.executeUpdate("Insert into customers(forename, surname, address, email, password) values('"
 				+ customer.getForename()
 				+ "','" + customer.getSurname()  
 				+ "','" + customer.getAddress() 
@@ -105,10 +105,10 @@ public class CustomerDaoMysql implements Dao<Customer> {
 	}
 
 	// Select from customer with id
-	public Customer readCustomer(Long id) {
+	public Customer readCustomer(Long customer_id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT FROM customers where id = " + id);) {
+				ResultSet resultSet = statement.executeQuery("SELECT FROM customers where id = " + customer_id);) {
 			resultSet.next();
 			return customerFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -151,10 +151,10 @@ public class CustomerDaoMysql implements Dao<Customer> {
 	 * @param id - id of the customer
 	 */
 	@Override
-	public void delete(long id) {
+	public void delete(long customer_id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from customers where id = " + id);
+			statement.executeUpdate("delete from customers where id = " + customer_id);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());

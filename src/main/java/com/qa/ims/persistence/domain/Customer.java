@@ -2,7 +2,7 @@ package com.qa.ims.persistence.domain;
 
 public class Customer {
 	// variables
-	private Long id;
+	private Long customer_id;
 	private String forename;
 	private String surname;
 	private String address;
@@ -14,15 +14,22 @@ public class Customer {
 		this.forename = forename;
 		this.surname = surname;
 	}
+	public Customer(String forename, String surname, String address, String email, String password) {
+		this.forename = forename;
+		this.surname = surname;
+		this.address = address;
+		this.email = email;
+		this.password = password;
+	}
 
-	public Customer(Long id, String forename, String surname) {
-		this.id = id;
+	public Customer(Long customer_id, String forename, String surname) {
+		this.customer_id = customer_id;
 		this.forename = forename;
 		this.surname = surname;
 	}
 
-	public Customer(Long id, String forename, String surname, String address, String email, String password) {
-		this.id = id;
+	public Customer(Long customer_id, String forename, String surname, String address, String email, String password) {
+		this.customer_id = customer_id;
 		this.forename = forename;
 		this.surname = surname;
 		this.address = address;
@@ -32,11 +39,11 @@ public class Customer {
 
 	// getters and setters
 	public Long getId() {
-		return id;
+		return customer_id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long customer_id) {
+		this.customer_id = customer_id;
 	}
 
 	public String getForename() {
@@ -80,7 +87,7 @@ public class Customer {
 	}
 
 	public String toString() {
-		return "id:" + id + " forename:" + forename + " surname:" + surname + "address: " + address;
+		return "id:" + customer_id + " forename:" + forename + " surname:" + surname + "address: " + address;
 	}
 
 	// override methods
@@ -89,7 +96,9 @@ public class Customer {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((forename == null) ? 0 : forename.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((customer_id == null) ? 0 : customer_id.hashCode());
+		
+		
 		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
@@ -111,10 +120,10 @@ public class Customer {
 				return false;
 		} else if (!forename.equals(other.forename))
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (customer_id == null) {
+			if (other.customer_id != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!customer_id.equals(other.customer_id))
 			return false;
 		if (surname == null) {
 			if (other.surname != null)

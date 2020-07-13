@@ -63,6 +63,9 @@ public class Ims {
 					
 					if (Action.getStringAction().equals(checkExit)){
 						closeDb(username, password);
+						LOGGER.info("Exiting the program ... Bye!");
+						System.exit(0);
+						
 					}
 					
 					if (Action.getStringAction().equals(checkReturn)) {

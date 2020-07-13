@@ -44,11 +44,17 @@ public class CustomerController implements CrudController<Customer>{
 	 */
 	@Override
 	public Customer create() {
-		LOGGER.info("Please enter a first name");
-		String firstName = getInput();
+		LOGGER.info("Please enter a forename");
+		String forename = getInput();
 		LOGGER.info("Please enter a surname");
 		String surname = getInput();
-		Customer customer = customerService.create(new Customer(firstName, surname));
+		LOGGER.info("Please enter an address");
+		String address = getInput();
+		LOGGER.info("Please enter an email");
+		String email = getInput();
+		LOGGER.info("Please enter a password");
+		String password = getInput();
+		Customer customer = customerService.create(new Customer(forename, surname, address, email, password));
 		LOGGER.info("Customer created");
 		return customer;
 	}
@@ -64,7 +70,13 @@ public class CustomerController implements CrudController<Customer>{
 		String firstName = getInput();
 		LOGGER.info("Please enter a surname");
 		String surname = getInput();
-		Customer customer = customerService.update(new Customer(id, firstName, surname));
+		LOGGER.info("Please enter an address");
+		String address = getInput();
+		LOGGER.info("Please enter an email");
+		String email = getInput();
+		LOGGER.info("Please enter a password");
+		String password = getInput();
+		Customer customer = customerService.update(new Customer(id, firstName, surname, address, email, password));
 		LOGGER.info("Customer Updated");
 		return customer;
 	}

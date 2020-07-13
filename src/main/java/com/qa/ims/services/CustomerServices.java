@@ -28,8 +28,8 @@ public class CustomerServices implements CrudServices<Customer> {
 		return customerDao.update(customer);
 	}
 
-	public void delete(Long id) {
-		customerDao.delete(id);
+	public void delete(Long customer_id) {
+		customerDao.delete(customer_id);
 	}
 
 }

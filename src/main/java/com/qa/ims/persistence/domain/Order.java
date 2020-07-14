@@ -1,5 +1,7 @@
 package com.qa.ims.persistence.domain;
 
+import  java.time.LocalDate;
+
 public class Order {
 	// variables
 		private Long order_id;
@@ -66,6 +68,15 @@ public class Order {
 		public void setOrder_date(String order_date) {
 			this.order_date = order_date;
 		}
+		
+		// convert string date to date format
+		public LocalDate getOrder_localDate() {
+			LocalDate date = LocalDate.parse(order_date);
+			return date;
+		}
+		
+		
+		
 		public double getOrder_total() {
 			return order_total;
 		}

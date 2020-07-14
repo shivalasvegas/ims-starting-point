@@ -9,10 +9,12 @@ import com.qa.ims.services.CrudServices;
 import com.qa.ims.utils.Utils;
 
 public class OrderController implements CrudController<Order>{
+	
 public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 	
 	private CrudServices<Order> orderService;
 	
+	public OrderController(CrudServices<Order> orderService) {
 		this.orderService = orderService;
 	}
 	
@@ -38,17 +40,15 @@ public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 	 */
 	@Override
 	public Order create() {
-		LOGGER.info("Please enter a forename");
-		String forename = getInput();
-		LOGGER.info("Please enter a surname");
-		String surname = getInput();
-		LOGGER.info("Please enter an address");
-		String address = getInput();
-		LOGGER.info("Please enter an email");
-		String email = getInput();
-		LOGGER.info("Please enter a password");
-		String password = getInput();
-		Order order = orderService.create(new Order(forename, surname, address, email, password));
+		LOGGER.info("Please enter the date");
+		String order_date = getInput();
+		LOGGER.info("Please enter the customer id");
+		Long fk_customer_id = Long.valueOf(getInput());
+		LOGGER.info("Please enter an product id");
+		Long fk_product_id = Long.valueOf(getInput());
+		LOGGER.info("Please enter the product quantity");
+		Long product_qty = Long.valueOf(getInput());
+		Order order = orderService.create(new Order(order_date, fk_customer_id, fk_product_id, product_qty));
 		LOGGER.info("Order created");
 		return order;
 	}
@@ -59,19 +59,17 @@ public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 	@Override
 	public Order update() {
 		LOGGER.info("Please enter the id of the order you would like to update");
-		Long id = Long.valueOf(getInput());
-		LOGGER.info("Please enter a first name");
-		String firstName = getInput();
-		LOGGER.info("Please enter a surname");
-		String surname = getInput();
-		LOGGER.info("Please enter an address");
-		String address = getInput();
-		LOGGER.info("Please enter an email");
-		String email = getInput();
-		LOGGER.info("Please enter a password");
-		String password = getInput();
-		Order order = orderService.update(new Order(id, firstName, surname, address, email, password));
-		LOGGER.info("Order Updated");
+		Long order_id = Long.valueOf(getInput());
+		LOGGER.info("Please enter the date");
+		String order_date = getInput();
+		LOGGER.info("Please enter the customer id");
+		Long fk_customer_id = Long.valueOf(getInput());
+		LOGGER.info("Please enter an product id");
+		Long fk_product_id = Long.valueOf(getInput());
+		LOGGER.info("Please enter the product quantity");
+		Long product_qty = Long.valueOf(getInput());
+		Order order = orderService.create(new Order(order_id, order_date, fk_customer_id, fk_product_id, product_qty));
+		LOGGER.info("Order created");
 		return order;
 	}
 
@@ -81,8 +79,8 @@ public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 	@Override
 	public void delete() {
 		LOGGER.info("Please enter the id of the order you would like to delete");
-		Long id = Long.valueOf(getInput());
-		orderService.delete(id);
+		Long order_id = Long.valueOf(getInput());
+		orderService.delete(order_id);
 	}
 	
 }

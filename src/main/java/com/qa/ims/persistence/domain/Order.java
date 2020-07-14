@@ -6,9 +6,8 @@ public class Order {
 		private String order_date;
 		private double order_total;
 		private Long fk_customer_id;
-		private Long fk_product_id;
-		private Long product_qty;
-		private double product_total;
+		private Long fk_orderline_id;
+		
 
 		// constructors
 		public Order() {
@@ -19,29 +18,25 @@ public class Order {
 			this.order_total = order_total;
 		}
 		
-		public Order(String order_date, double order_total, Long fk_customer_id, Long fk_product_id, Long product_qty, double product_total) {
+		public Order(String order_date, double order_total, Long fk_customer_id, Long fk_orderline_id) {
 			this.order_date = order_date;
 			this.order_total = order_total;
 			this.fk_customer_id = fk_customer_id;
-			this.fk_product_id = fk_product_id;
-			this.product_qty = product_qty;
-			this.product_total = product_total;
+			this.fk_orderline_id = fk_orderline_id;
+			
 		}
 		
-		public Order(String order_date, Long fk_customer_id, Long fk_product_id, Long product_qty) {
+		public Order(String order_date, Long fk_customer_id) {
 			this.order_date = order_date;
 			this.fk_customer_id = fk_customer_id;
-			this.fk_product_id = fk_product_id;
-			this.product_qty = product_qty;
-		
+			
 		}
 
-		public Order(Long order_id, String order_date, Long fk_customer_id, Long fk_product_id, Long product_qty) {
+		public Order(Long order_id, String order_date, Long fk_customer_id) {
 			this.order_id = order_id;
 			this.order_date = order_date;
 			this.fk_customer_id = fk_customer_id;
-			this.fk_product_id = fk_product_id;
-			this.product_qty = product_qty;
+		
 		
 		}
 		public Order(Long order_id, String order_date, double order_total) {
@@ -50,14 +45,13 @@ public class Order {
 			this.order_total = order_total;
 		}
 
-		public Order(Long order_id, String order_date, double order_total, Long fk_customer_id, Long fk_product_id, Long product_qty, double product_total) {
+		public Order(Long order_id, String order_date, double order_total, Long fk_customer_id, Long fk_orderline_id) {
 			this.order_id = order_id;
 			this.order_date = order_date;
 			this.order_total = order_total;
 			this.fk_customer_id = fk_customer_id;
-			this.fk_product_id = fk_product_id;
-			this.product_qty = product_qty;
-			this.product_total = product_total;
+			this.fk_orderline_id = fk_orderline_id;
+			
 		}
 		
 		// getters and setters
@@ -86,36 +80,23 @@ public class Order {
 			this.fk_customer_id = fk_customer_id;
 		}
 		public Long getFk_product_id() {
-			return fk_product_id;
+			return fk_orderline_id;
 		}
-		public void setFk_product_id(Long fk_product_id) {
-			this.fk_product_id = fk_product_id;
+		public void setFk_product_id(Long fk_orderline_id) {
+			this.fk_orderline_id = fk_orderline_id;
 		}
-		public Long getProduct_qty() {
-			return product_qty;
-		}
-		public void setProduct_qty(Long product_qty) {
-			this.product_qty = product_qty;
-		}
-		public double getProduct_total() {
-			return product_total;
-		}
-		public void setProduct_total(double product_total) {
-			this.product_total = product_total;
-		}
+		
+		//Hashcode and equals
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
 			result = prime * result + ((fk_customer_id == null) ? 0 : fk_customer_id.hashCode());
-			result = prime * result + ((fk_product_id == null) ? 0 : fk_product_id.hashCode());
+			result = prime * result + ((fk_orderline_id == null) ? 0 : fk_orderline_id.hashCode());
 			result = prime * result + ((order_date == null) ? 0 : order_date.hashCode());
 			result = prime * result + ((order_id == null) ? 0 : order_id.hashCode());
 			long temp;
 			temp = Double.doubleToLongBits(order_total);
-			result = prime * result + (int) (temp ^ (temp >>> 32));
-			result = prime * result + ((product_qty == null) ? 0 : product_qty.hashCode());
-			temp = Double.doubleToLongBits(product_total);
 			result = prime * result + (int) (temp ^ (temp >>> 32));
 			return result;
 		}
@@ -133,10 +114,10 @@ public class Order {
 					return false;
 			} else if (!fk_customer_id.equals(other.fk_customer_id))
 				return false;
-			if (fk_product_id == null) {
-				if (other.fk_product_id != null)
+			if (fk_orderline_id == null) {
+				if (other.fk_orderline_id != null)
 					return false;
-			} else if (!fk_product_id.equals(other.fk_product_id))
+			} else if (!fk_orderline_id.equals(other.fk_orderline_id))
 				return false;
 			if (order_date == null) {
 				if (other.order_date != null)
@@ -150,17 +131,13 @@ public class Order {
 				return false;
 			if (Double.doubleToLongBits(order_total) != Double.doubleToLongBits(other.order_total))
 				return false;
-			if (product_qty == null) {
-				if (other.product_qty != null)
-					return false;
-			} else if (!product_qty.equals(other.product_qty))
-				return false;
-			if (Double.doubleToLongBits(product_total) != Double.doubleToLongBits(other.product_total))
-				return false;
 			return true;
 		}
 		
-		// Override hashcode and equals
+		
+		
+		
+		
 		
 		
 		

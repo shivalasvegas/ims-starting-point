@@ -18,6 +18,7 @@ public class Order {
 			this.order_date = order_date;
 			this.order_total = order_total;
 		}
+		
 		public Order(String order_date, double order_total, Long fk_customer_id, Long fk_product_id, Long product_qty, double product_total) {
 			this.order_date = order_date;
 			this.order_total = order_total;
@@ -26,7 +27,23 @@ public class Order {
 			this.product_qty = product_qty;
 			this.product_total = product_total;
 		}
+		
+		public Order(String order_date, Long fk_customer_id, Long fk_product_id, Long product_qty) {
+			this.order_date = order_date;
+			this.fk_customer_id = fk_customer_id;
+			this.fk_product_id = fk_product_id;
+			this.product_qty = product_qty;
+		
+		}
 
+		public Order(Long order_id, String order_date, Long fk_customer_id, Long fk_product_id, Long product_qty) {
+			this.order_id = order_id;
+			this.order_date = order_date;
+			this.fk_customer_id = fk_customer_id;
+			this.fk_product_id = fk_product_id;
+			this.product_qty = product_qty;
+		
+		}
 		public Order(Long order_id, String order_date, double order_total) {
 			this.order_id = order_id;
 			this.order_date = order_date;
@@ -44,10 +61,10 @@ public class Order {
 		}
 		
 		// getters and setters
-		public Long getOrder_id() {
+		public Long getId() {
 			return order_id;
 		}
-		public void setOrder_id(Long order_id) {
+		public void setId(Long order_id) {
 			this.order_id = order_id;
 		}
 		public String getOrder_date() {

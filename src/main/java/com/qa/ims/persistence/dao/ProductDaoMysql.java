@@ -35,11 +35,11 @@ public class ProductDaoMysql implements Dao<Product>{
 	
 	Product productFromResultSet(ResultSet resultSet) throws SQLException {
 		Long product_id = resultSet.getLong("product_id");
-		Long category_id = resultSet.getLong("category_id");
+		Long fk_category_id = resultSet.getLong("fk_category_id");
 		String product_name = resultSet.getString("product_name");
 		double product_price = resultSet.getDouble("product_price");
 		
-		return new Product(product_id, category_id, product_name, product_price);
+		return new Product(product_id, product_name, product_price, fk_category_id);
 	}
 
 	/**
@@ -87,10 +87,10 @@ public class ProductDaoMysql implements Dao<Product>{
 	public Product create(Product product) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("Insert into products(category_id, product_name, product_price, email, password) values('"
-				+ product.getCategory_id()
-				+ "','" + product.getProduct_name()  
-				+ "','" + product.getProduct_price() 
+			statement.executeUpdate("Insert into products(product_name, product_price, fk_category_id) values('"
+				+ product.getProduct_name()  
+				+ "','" + product.getProduct_price()
+				+ "','" + product.getCategory_id()
  				+ "')");
 			return readLatest();
 		} catch (Exception e) {
@@ -125,10 +125,10 @@ public class ProductDaoMysql implements Dao<Product>{
 	public Product update(Product product) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update products set category_id ='" 
-				+ product.getCategory_id() 
-				+ "', product_name ='" + product.getProduct_name()
+			statement.executeUpdate("update products set product_name ='" 
+				+ product.getProduct_name()
 				+ "', product_price = '" + product.getProduct_price()
+				+ "', fk_category_id = '" + product.getCategory_id() 
 				+ "' where id =" + product.getId());
 			return readProduct(product.getId());
 		} catch (Exception e) {

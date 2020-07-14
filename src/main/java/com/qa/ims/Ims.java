@@ -13,9 +13,12 @@ import org.apache.log4j.Logger;
 import com.qa.ims.controller.Action;
 import com.qa.ims.controller.CrudController;
 import com.qa.ims.controller.CustomerController;
+import com.qa.ims.controller.ProductController;
 import com.qa.ims.persistence.dao.CustomerDaoMysql;
+import com.qa.ims.persistence.dao.ProductDaoMysql;
 import com.qa.ims.persistence.domain.Domain;
 import com.qa.ims.services.CustomerServices;
+import com.qa.ims.services.ProductServices;
 import com.qa.ims.utils.Utils;
 
 public class Ims {
@@ -76,6 +79,28 @@ public class Ims {
 				} while (keepGoing);
 				break;
 			case ITEM:
+				ProductController productController = new ProductController(
+						new ProductServices(new ProductDaoMysql(username, password)));
+				do {
+
+					doAction(productController, action);
+
+					Action.printActions();
+					action = Action.getAction();
+					
+					if (Action.getStringAction().equals(checkExit)){
+						closeDb(username, password);
+						LOGGER.info("Exiting the program ... Bye!");
+						System.exit(0);
+						
+					}
+					
+					if (Action.getStringAction().equals(checkReturn)) {
+						LOGGER.info("Returning to the database selection ... ");
+						keepGoing = false;
+					}
+
+				} while (keepGoing);
 				break;
 			case ORDER:
 				break;

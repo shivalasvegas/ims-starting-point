@@ -48,11 +48,11 @@ public class OrderLine {
 
 			
 			//getters and setters
-			public Long getOrderLine_id() {
+			public Long getId() {
 				return orderLine_id;
 			}
 
-			public void setOrderLine_id(Long orderLine_id) {
+			public void setId(Long orderLine_id) {
 				this.orderLine_id = orderLine_id;
 			}
 

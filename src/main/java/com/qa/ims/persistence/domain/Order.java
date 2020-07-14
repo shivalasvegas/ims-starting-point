@@ -45,10 +45,9 @@ public class Order {
 			this.order_total = order_total;
 		}
 
-		public Order(Long order_id, String order_date, double order_total, Long fk_customer_id, Long fk_orderline_id) {
+		public Order(Long order_id, String order_date, Long fk_customer_id, Long fk_orderline_id) {
 			this.order_id = order_id;
 			this.order_date = order_date;
-			this.order_total = order_total;
 			this.fk_customer_id = fk_customer_id;
 			this.fk_orderline_id = fk_orderline_id;
 			

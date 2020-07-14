@@ -38,9 +38,7 @@ public class OrderDaoMysql implements Dao<Order>{
 		Long order_id = resultSet.getLong("order_id");
 		String order_date = resultSet.getString("order_date");
 		Long fk_customer_id = resultSet.getLong("fk_customer_id");
-		Long fk_product_id = resultSet.getLong("fk_product_id");
-		Long product_qty = resultSet.getLong("product_qty");
-		return new Order(order_id, order_date, fk_customer_id, fk_product_id, product_qty);
+		return new Order(order_id, order_date, fk_customer_id);
 	}
 
 	/**
@@ -88,11 +86,9 @@ public class OrderDaoMysql implements Dao<Order>{
 	public Order create(Order order) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, product_qty);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("Insert into orders(order_date, order_total, fk_customer_id, fk_product_id, product_qty) values('"
-				+ order.getOrder_date()  
-				+ "','" + order.getFk_customer_id() 
-				+ "','" + order.getFk_product_id()
-				+ "','" + order.getProduct_qty()
+			statement.executeUpdate("Insert into orders(order_date, fk_customer_id) values('"
+				+ order.getFk_customer_id() 
+				+ "','" + order.getFk_product_id()	
  				+ "')");
 			return readLatest();
 		} catch (Exception e) {
@@ -130,8 +126,6 @@ public class OrderDaoMysql implements Dao<Order>{
 			statement.executeUpdate("update orders set order_date ='" 
 				+ order.getOrder_date() 
 				+ "', fk_customer_id = '" + order.getFk_customer_id()
-				+ "', fk_product_id = '" + order.getFk_product_id()
-				+ "', product_qty = '" + order.getProduct_qty()
 				+ "' where id =" + order.getId());
 			return readOrder(order.getId());
 		} catch (Exception e) {

@@ -44,14 +44,13 @@ public static final Logger LOGGER = Logger.getLogger(ProductController.class);
 	 */
 	@Override
 	public Product create() {
-		LOGGER.info("Please enter the category id");
-		Long category_id = Long.valueOf(getInput());
 		LOGGER.info("Please enter the product name");
 		String product_name = getInput();
 		LOGGER.info("Please enter the product price");
 		double product_price = Double.valueOf(getInput());	
-		
-		Product product = productService.create(new Product(category_id, product_name, product_price));
+		LOGGER.info("Please enter the category id");
+		Long fk_category_id = Long.valueOf(getInput());
+		Product product = productService.create(new Product(product_name, product_price, fk_category_id));
 		LOGGER.info("Product created");
 		return product;
 	}
@@ -63,14 +62,14 @@ public static final Logger LOGGER = Logger.getLogger(ProductController.class);
 	public Product update() {
 		LOGGER.info("Please enter the id of the product you would like to update");
 		Long product_id = Long.valueOf(getInput());
-		LOGGER.info("Please enter the category_id");
-		Long category_id = Long.valueOf(getInput());
+		
 		LOGGER.info("Please enter the product name");
 		String product_name = getInput();
 		LOGGER.info("Please enter the product price");
 		double product_price = Double.valueOf(getInput());
-		
-		Product product = productService.update(new Product(product_id, category_id, product_name, product_price));
+		LOGGER.info("Please enter the fk_category_id");
+		Long fk_category_id = Long.valueOf(getInput());
+		Product product = productService.update(new Product(product_id, product_name, product_price, fk_category_id));
 		LOGGER.info("Product Updated");
 		return product;
 	}

@@ -14,7 +14,7 @@ import com.qa.ims.persistence.domain.OrderLine;
 import com.qa.ims.utils.Utils;
 
 public class OrderLineDaoMysql implements Dao<OrderLine> {
-	
+
 	public static final Logger LOGGER = Logger.getLogger(OrderLineDaoMysql.class);
 
 	private String jdbcConnectionUrl;
@@ -32,7 +32,7 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 		this.username = username;
 		this.product_qty = product_qty;
 	}
-	
+
 	OrderLine orderLineFromResultSet(ResultSet resultSet) throws SQLException {
 		Long orderLine_id = resultSet.getLong("orderLine_id");
 		Long fk_customer_id = resultSet.getLong("fk_customer_id");
@@ -64,12 +64,14 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 		}
 		return new ArrayList<>();
 	}
-	
-	//Executes ReadLastest Query on database  selects orderLine at id 1 throws exception
+
+	// Executes ReadLastest Query on database selects orderLine at id 1 throws
+	// exception
 	public OrderLine readLatest() {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, product_qty);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orderLines ORDER BY orderLine_id DESC LIMIT 1");) {
+				ResultSet resultSet = statement
+						.executeQuery("SELECT * FROM orderLines ORDER BY orderLine_id DESC LIMIT 1");) {
 			resultSet.next();
 			return orderLineFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -88,12 +90,16 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 	public OrderLine create(OrderLine orderLine) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, product_qty);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("Insert into orderLines(fk_customer_id, fk_order_id, fk_product_id, product_qty) values('"
-				+ orderLine.getFk_customer_id() 
-				+ "','" + orderLine.getFk_order_id()
-				+ "','" + orderLine.getFk_product_id()
-				+ "','" + orderLine.getProduct_qty()
- 				+ "')");
+			statement.executeUpdate(
+					"create trigger calc_productTotal before insert on joining for each row set new.product_total := select'"
+							+ orderLine.getProduct_qty()
+							+ "'* products.product_price from products where products.product_id = '"
+							+ orderLine.getFk_product_id());
+
+			statement.executeUpdate(
+					"Insert into orderLines(fk_customer_id, fk_order_id, fk_product_id, product_qty) values('"
+							+ orderLine.getFk_customer_id() + "','" + orderLine.getFk_order_id() + "','"
+							+ orderLine.getFk_product_id() + "','" + orderLine.getProduct_qty() + "')");
 			return readLatest();
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -120,18 +126,16 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 	 * Updates a orderLine in the database
 	 *
 	 * @param orderLine - takes in a orderLine object, the id field will be used to
-	 *                 update that orderLine in the database
+	 *                  update that orderLine in the database
 	 * @return
 	 */
 	@Override
 	public OrderLine update(OrderLine orderLine) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, product_qty);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update orderLines set orderLine ='"  
-				+ "', fk_customer_id = '" + orderLine.getFk_customer_id()
-				+ "', fk_product_id = '" + orderLine.getFk_product_id()
-				+ "', product_qty = '" + orderLine.getProduct_qty()
-				+ "' where id =" + orderLine.getId());
+			statement.executeUpdate("update orderLines set orderLine ='" + "', fk_customer_id = '"
+					+ orderLine.getFk_customer_id() + "', fk_product_id = '" + orderLine.getFk_product_id()
+					+ "', product_qty = '" + orderLine.getProduct_qty() + "' where id =" + orderLine.getId());
 			return readOrderLine(orderLine.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -141,8 +145,8 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 	}
 
 	/**
-	 * Follows Dao convention of long id (no uppercase)
-	 * Deletes a orderLine in the database
+	 * Follows Dao convention of long id (no uppercase) Deletes a orderLine in the
+	 * database
 	 *
 	 * @param id - id of the orderLine
 	 */
@@ -156,6 +160,5 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 			LOGGER.error(e.getMessage());
 		}
 	}
-
 
 }

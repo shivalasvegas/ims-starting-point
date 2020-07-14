@@ -87,8 +87,8 @@ public class OrderDaoMysql implements Dao<Order>{
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, product_qty);
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("Insert into orders(order_date, fk_customer_id) values('"
-				+ order.getFk_customer_id() 
-				+ "','" + order.getFk_product_id()	
+				+ order.getOrder_localDate() 
+				+ "','" + order.getFk_customer_id()	
  				+ "')");
 			return readLatest();
 		} catch (Exception e) {
@@ -124,7 +124,7 @@ public class OrderDaoMysql implements Dao<Order>{
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, product_qty);
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("update orders set order_date ='" 
-				+ order.getOrder_date() 
+				+ order.getOrder_localDate() 
 				+ "', fk_customer_id = '" + order.getFk_customer_id()
 				+ "' where id =" + order.getId());
 			return readOrder(order.getId());

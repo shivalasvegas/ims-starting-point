@@ -76,7 +76,6 @@ public class Order {
 		}
 		
 		
-		
 		public double getOrder_total() {
 			return order_total;
 		}

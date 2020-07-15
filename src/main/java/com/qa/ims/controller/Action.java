@@ -62,9 +62,25 @@ public enum Action {
 		}
 		return action;
 	}
+	
+	public static Action getReadAction(){
+		Action action;
+		while (true) {
+			try {
+				utilString = Utils.getRead();
+				action = Action.valueOf(utilString);
+				break;
+			} catch (IllegalArgumentException e) {
+				LOGGER.error("Invalid selection please try again");
+			}
+		}
+		return action;
+	}
+	
 	//To check input in ims class 
 	public static String getStringAction() {
 		
 		return utilString.toLowerCase();
 	}
+	
 }

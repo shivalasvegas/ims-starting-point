@@ -15,13 +15,12 @@ import com.qa.ims.persistence.domain.Order;
 
 import com.qa.ims.utils.Utils;
 
-public class OrderDaoMysql implements Dao<Order>{
+public class OrderDaoMysql implements Dao<Order> {
 	public static final Logger LOGGER = Logger.getLogger(OrderDaoMysql.class);
 
 	private String jdbcConnectionUrl;
 	private String username;
 	private String password;
-
 
 	public OrderDaoMysql(String username, String password) {
 		this.jdbcConnectionUrl = "jdbc:mysql://" + Utils.MYSQL_URL + "/ims";
@@ -34,7 +33,7 @@ public class OrderDaoMysql implements Dao<Order>{
 		this.username = username;
 		this.password = password;
 	}
-	
+
 	Order orderFromResultSet(ResultSet resultSet) throws SQLException {
 		Long order_id = resultSet.getLong("order_id");
 		String order_date = resultSet.getString("order_date");
@@ -63,8 +62,8 @@ public class OrderDaoMysql implements Dao<Order>{
 		}
 		return new ArrayList<>();
 	}
-	
-	//Executes ReadLastest Query on database  selects order at id 1 throws exception
+
+	// Executes ReadLastest Query on database selects order at id 1 throws exception
 	public Order readLatest() {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
@@ -87,14 +86,26 @@ public class OrderDaoMysql implements Dao<Order>{
 	public Order create(Order order) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			
-			statement.executeUpdate("Insert into orders(order_date, order_total, fk_customer_id) values('"
-				+ order.getOrder_date() 
-				+ "', '" + order.getOrder_total()
-				+ "','" + order.getFk_customer_id()
- 				+ "')");
-			
-			
+
+			statement.executeUpdate(
+					"Insert into orders(order_date, order_total, fk_customer_id) values('" + order.getOrder_date()
+							+ "', '" + order.getOrder_total() + "','" + order.getFk_customer_id() + "')");
+
+			return readLatest();
+		} catch (Exception e) {
+			LOGGER.debug(e.getStackTrace());
+			LOGGER.error(e.getMessage());
+		}
+		return null;
+	}
+
+	public Order createTotal(Long order_id) {
+		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
+				Statement statement = connection.createStatement();) {
+
+			statement.executeUpdate(
+					"UPDATE orders ord INNER JOIN orderlines ordlines ON ordlines.orderlines_id = ord.fk_orderlines_id SET ord.order_total = (SELECT SUM(ordlines.product_total FROM orderlines WHERE ordlines.fk_order_id = " + order_id);
+
 			return readLatest();
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -120,18 +131,16 @@ public class OrderDaoMysql implements Dao<Order>{
 	/**
 	 * Updates a order in the database
 	 *
-	 * @param order - takes in a order object, the id field will be used to
-	 *                 update that order in the database
+	 * @param order - takes in a order object, the id field will be used to update
+	 *              that order in the database
 	 * @return
 	 */
 	@Override
 	public Order update(Order order) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update orders set order_date ='" 
-				+ order.getOrder_date() 
-				+ "', fk_customer_id = '" + order.getFk_customer_id()
-				+ "' where order_id =" + order.getId());
+			statement.executeUpdate("update orders set order_date ='" + order.getOrder_date() + "', fk_customer_id = '"
+					+ order.getFk_customer_id() + "' where order_id =" + order.getId());
 			return readOrder(order.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -141,8 +150,8 @@ public class OrderDaoMysql implements Dao<Order>{
 	}
 
 	/**
-	 * Follows Dao convention of long id (no uppercase)
-	 * Deletes a order in the database
+	 * Follows Dao convention of long id (no uppercase) Deletes a order in the
+	 * database
 	 *
 	 * @param id - id of the order
 	 */

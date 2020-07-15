@@ -90,11 +90,6 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 	public OrderLine create(OrderLine orderLine) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-//			statement.executeUpdate(
-//					"create trigger calc_productTotal before insert on joining for each row set new.product_total = select"
-//							+ orderLine.getProduct_qty()
-//							+ " * products.product_price from products where products.product_id = "
-//							+ orderLine.getFk_product_id());
 
 			statement.executeUpdate(
 					"Insert into orderlines(fk_customer_id, fk_order_id, fk_product_id, product_quantity, product_total) values('"

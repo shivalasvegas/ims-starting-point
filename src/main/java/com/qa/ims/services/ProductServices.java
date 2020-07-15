@@ -29,5 +29,11 @@ private Dao<Product> productDao;
 	public void delete(Long product_id) {
 		productDao.delete(product_id);
 	}
+
+	@Override
+	public void calc(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

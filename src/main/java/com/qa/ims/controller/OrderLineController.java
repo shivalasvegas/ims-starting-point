@@ -83,6 +83,13 @@ public static final Logger LOGGER = Logger.getLogger(OrderLineController.class);
 		Long orderLine_id = Long.valueOf(getInput());
 		orderLineService.delete(orderLine_id);
 	}
+
+
+	@Override
+	public void calc() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

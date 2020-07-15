@@ -29,5 +29,11 @@ private Dao<OrderLine> orderLineDao;
 		orderLineDao.delete(orderLine_id);
 	}
 
+	@Override
+	public void calc(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

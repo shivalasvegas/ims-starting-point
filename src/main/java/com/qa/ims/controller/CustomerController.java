@@ -90,5 +90,12 @@ public class CustomerController implements CrudController<Customer>{
 		Long id = Long.valueOf(getInput());
 		customerService.delete(id);
 	}
+
+
+	@Override
+	public void calc() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

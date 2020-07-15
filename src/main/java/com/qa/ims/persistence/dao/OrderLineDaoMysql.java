@@ -160,4 +160,10 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 		}
 	}
 
+	@Override
+	public void calc(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

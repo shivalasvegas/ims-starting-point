@@ -83,6 +83,13 @@ public static final Logger LOGGER = Logger.getLogger(ProductController.class);
 		Long product_id = Long.valueOf(getInput());
 		productService.delete(product_id);
 	}
+
+
+	@Override
+	public void calc() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

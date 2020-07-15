@@ -162,4 +162,10 @@ public class CustomerDaoMysql implements Dao<Customer> {
 		}
 	}
 
+	@Override
+	public void calc(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -155,4 +155,10 @@ public class ProductDaoMysql implements Dao<Product>{
 		}
 	}
 
+	@Override
+	public void calc(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

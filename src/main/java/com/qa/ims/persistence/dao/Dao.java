@@ -7,6 +7,8 @@ public interface Dao<T> {
     List<T> readAll();
      
     T create(T t);
+    
+    void calc(long id);
      
     T update(T t);
      

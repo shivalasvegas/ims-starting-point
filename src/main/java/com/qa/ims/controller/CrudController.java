@@ -11,6 +11,8 @@ public interface CrudController<T> {
     List<T> readAll();
      
     T create();
+    
+    void calc();
      
     T update();
      

@@ -77,5 +77,13 @@ public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 		Long order_id = Long.valueOf(getInput());
 		orderService.delete(order_id);
 	}
+
+
+	@Override
+	public void calc() {
+		LOGGER.info("Please enter the id of the order you would like to calculate");
+		Long order_id = Long.valueOf(getInput());
+		orderService.calc(order_id);
+	}
 	
 }

@@ -99,19 +99,19 @@ public class OrderDaoMysql implements Dao<Order> {
 		return null;
 	}
 
-	public Order createTotal(Long order_id) {
+
+	public void calc(long order_id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
 
 			statement.executeUpdate(
 					"UPDATE orders ord INNER JOIN orderlines ordlines ON ordlines.orderlines_id = ord.fk_orderlines_id SET ord.order_total = (SELECT SUM(ordlines.product_total FROM orderlines WHERE ordlines.fk_order_id = " + order_id);
 
-			return readLatest();
+			
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
 		}
-		return null;
 	}
 
 	// Select from order with id
@@ -166,4 +166,5 @@ public class OrderDaoMysql implements Dao<Order> {
 		}
 	}
 
+	
 }

@@ -88,8 +88,7 @@ public class Ims {
 						new OrderServices(new OrderDaoMysql(username, password)));
 				do {
 
-
-					if (Action.getStringAction().equals(checkCreate)) {
+						if (Action.getStringAction().equals(checkCreate)) {
 						ProductController productControl = new ProductController(
 								new ProductServices(new ProductDaoMysql(username, password)));
 
@@ -102,6 +101,7 @@ public class Ims {
 							LOGGER.info("Choose from our range of amazing products!");
 							action = Action.getReadAction();
 							doAction(productControl, action);
+							LOGGER.info("Redirecting you for more order information ...");
 							LOGGER.info("Please enter your detailed order choice below:");	
 							Action.printActions();
 							action = Action.getAction();
@@ -132,6 +132,8 @@ public class Ims {
 						action = Action.getAction();
 					}
 					
+					
+					
 					if (Action.getStringAction().equals(checkExit)) {
 						closeDb();
 						LOGGER.info("Exiting the program ... Bye!");
@@ -139,10 +141,14 @@ public class Ims {
 
 					}
 					
+					
+					
 					if (Action.getStringAction().equals(checkReturn)&&!keepOnGoing) {
 						LOGGER.info("Returning to the database selection ... ");
 						keepGoing = false;
 					}
+					
+					
 
 				} while (keepGoing);
 				
@@ -161,6 +167,9 @@ public class Ims {
 		switch (action) {
 		case CREATE:
 			crudController.create();
+			break;
+		case CALC:
+			crudController.calc();
 			break;
 		case READ:
 			crudController.readAll();

@@ -19,6 +19,7 @@ private Dao<Order> orderDao;
 	public Order create(Order order) {
 		return orderDao.create(order);
 	}
+	
 
 	public Order update(Order order) {
 		return orderDao.update(order);
@@ -26,6 +27,11 @@ private Dao<Order> orderDao;
 
 	public void delete(Long order_id) {
 		orderDao.delete(order_id);
+	}
+
+	@Override
+	public void calc(Long order_id) {
+		orderDao.calc(order_id);	
 	}
 
 }

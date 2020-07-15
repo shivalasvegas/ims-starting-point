@@ -12,7 +12,7 @@ import com.qa.ims.utils.Utils;
 public enum Action {
 	CREATE("To save a new item into the database"), READ("To read an item from the database"),
 	UPDATE("To change an item already in the database"), DELETE("To remove an item from the database"),
-	RETURN("To return to database selection"), EXIT("Exit the program");
+	RETURN("To return to database selection"), EXIT("Exit the program"), CALC("To calculate your order total");
 
 	public static final Logger LOGGER = Logger.getLogger(Action.class);
 
@@ -68,6 +68,21 @@ public enum Action {
 		while (true) {
 			try {
 				utilString = Utils.getRead();
+				action = Action.valueOf(utilString);
+				break;
+			} catch (IllegalArgumentException e) {
+				LOGGER.error("Invalid selection please try again");
+			}
+		}
+		return action;
+	}
+	
+	
+	public static Action getCalcAction(){
+		Action action;
+		while (true) {
+			try {
+				utilString = Utils.getCalc();
 				action = Action.valueOf(utilString);
 				break;
 			} catch (IllegalArgumentException e) {

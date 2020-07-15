@@ -14,6 +14,7 @@ public class Customer {
 		this.forename = forename;
 		this.surname = surname;
 	}
+
 	public Customer(String forename, String surname, String address, String email, String password) {
 		this.forename = forename;
 		this.surname = surname;
@@ -97,8 +98,7 @@ public class Customer {
 		int result = 1;
 		result = prime * result + ((forename == null) ? 0 : forename.hashCode());
 		result = prime * result + ((customer_id == null) ? 0 : customer_id.hashCode());
-		
-		
+
 		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());

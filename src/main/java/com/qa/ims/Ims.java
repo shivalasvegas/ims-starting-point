@@ -13,11 +13,17 @@ import org.apache.log4j.Logger;
 import com.qa.ims.controller.Action;
 import com.qa.ims.controller.CrudController;
 import com.qa.ims.controller.CustomerController;
+import com.qa.ims.controller.OrderController;
+import com.qa.ims.controller.OrderLineController;
 import com.qa.ims.controller.ProductController;
 import com.qa.ims.persistence.dao.CustomerDaoMysql;
 import com.qa.ims.persistence.dao.ProductDaoMysql;
+import com.qa.ims.persistence.dao.OrderDaoMysql;
+import com.qa.ims.persistence.dao.OrderLineDaoMysql;
 import com.qa.ims.persistence.domain.Domain;
 import com.qa.ims.services.CustomerServices;
+import com.qa.ims.services.OrderServices;
+import com.qa.ims.services.OrderLineServices;
 import com.qa.ims.services.ProductServices;
 import com.qa.ims.utils.Utils;
 
@@ -26,15 +32,18 @@ public class Ims {
 	public static final Logger LOGGER = Logger.getLogger(Ims.class);
 	private String checkReturn = "return";
 	private String checkExit = "exit";
-	private boolean keepGoing = true;
+	private String checkCreate = "create";
+	private boolean keepGoing;
+	private boolean keepOnGoing = true;
 	private boolean returnToDatabase = true;
-	
+
 	public void imsSystem() {
 		LOGGER.info("Please enter your username: ");
 		String username = Utils.getInput();
 		LOGGER.info("Pease enter your password: ");
 		String password = Utils.getInput();
-
+		keepGoing= true;
+		
 		// Initialise database connection
 		init(username, password);
 
@@ -43,7 +52,7 @@ public class Ims {
 			Domain.printDomains();
 
 			Domain domain = Domain.getDomain();
-			if (Domain.getStringDomain().equals(checkExit)){
+			if (Domain.getStringDomain().equals(checkExit)) {
 				closeDb(username, password);
 				LOGGER.info("Exiting the program ... Bye!");
 				System.exit(0);
@@ -59,19 +68,20 @@ public class Ims {
 						new CustomerServices(new CustomerDaoMysql(username, password)));
 				do {
 
-					doAction(customerController, action);
-
-					Action.printActions();
-					action = Action.getAction();
+					if (!Action.getStringAction().equals(checkExit) || !Action.getStringAction().equals(checkReturn)) {
+						doAction(customerController, action);
+						LOGGER.info("Please make another selection ... ");
+						Action.printActions();
+						action = Action.getAction();
+					}
 					
-					if (Action.getStringAction().equals(checkExit)){
+					if (Action.getStringAction().equals(checkExit)) {
 						closeDb(username, password);
 						LOGGER.info("Exiting the program ... Bye!");
 						System.exit(0);
-						
 					}
-					
-					if (Action.getStringAction().equals(checkReturn)) {
+
+						if (Action.getStringAction().equals(checkReturn)) {
 						LOGGER.info("Returning to the database selection ... ");
 						keepGoing = false;
 					}
@@ -83,26 +93,91 @@ public class Ims {
 						new ProductServices(new ProductDaoMysql(username, password)));
 				do {
 
-					doAction(productController, action);
-
-					Action.printActions();
-					action = Action.getAction();
-					
-					if (Action.getStringAction().equals(checkExit)){
+					if (!Action.getStringAction().equals(checkExit) || !Action.getStringAction().equals(checkReturn)) {
+						doAction(productController, action);
+						LOGGER.info("Please make another selection ... ");
+						Action.printActions();
+						action = Action.getAction();
+					}
+					if (Action.getStringAction().equals(checkExit)) {
 						closeDb(username, password);
 						LOGGER.info("Exiting the program ... Bye!");
 						System.exit(0);
-						
+
 					}
 					
 					if (Action.getStringAction().equals(checkReturn)) {
 						LOGGER.info("Returning to the database selection ... ");
 						keepGoing = false;
-					}
-
+					}else keepGoing = false;
+					
 				} while (keepGoing);
+				
 				break;
 			case ORDER:
+				OrderController OrderController = new OrderController(
+						new OrderServices(new OrderDaoMysql(username, password)));
+				do {
+
+
+					if (Action.getStringAction().equals(checkCreate)) {
+						ProductController productControl = new ProductController(
+								new ProductServices(new ProductDaoMysql(username, password)));
+
+						OrderLineController OrderLineController = new OrderLineController(
+								new OrderLineServices(new OrderLineDaoMysql(username, password)));
+						
+						doAction(OrderController, action);
+						
+						do {
+							LOGGER.info("Choose from our range of amazing products!");
+							action = Action.getReadAction();
+							doAction(productControl, action);
+							LOGGER.info("Please enter your detailed order choice below:");	
+							Action.printActions();
+							action = Action.getAction();
+							
+							if (!Action.getStringAction().equals(checkExit) || !Action.getStringAction().equals(checkReturn)) {
+								doAction(OrderLineController, action);
+							}
+							
+							if (Action.getStringAction().equals(checkExit)) {
+								closeDb(username, password);
+								LOGGER.info("Exiting the program ... Bye!");
+								System.exit(0);
+							}
+							
+							if (Action.getStringAction().equals(checkReturn)) {
+								LOGGER.info("Returning to order selection ... ");
+								keepOnGoing = false;
+							}
+						
+						} while (keepOnGoing);
+
+					}
+					
+					if (!Action.getStringAction().equals(checkExit) || !Action.getStringAction().equals(checkReturn) || !Action.getStringAction().equals(checkCreate)) {
+						doAction(OrderController, action);
+						LOGGER.info("Please make another selection ... ");
+						Action.printActions();
+						action = Action.getAction();
+					}
+					
+					if (Action.getStringAction().equals(checkExit)) {
+						closeDb(username, password);
+						LOGGER.info("Exiting the program ... Bye!");
+						System.exit(0);
+
+					}
+					
+					if (Action.getStringAction().equals(checkReturn)&&!keepOnGoing) {
+						LOGGER.info("Returning to the database selection ... ");
+						keepGoing = false;
+					}
+
+					
+				} while (keepGoing);
+				
 				break;
 			case EXIT:
 				break;
@@ -113,7 +188,6 @@ public class Ims {
 		} while (returnToDatabase);
 	}
 
-	
 	public void doAction(CrudController<?> crudController, Action action) {
 
 		switch (action) {
@@ -139,6 +213,7 @@ public class Ims {
 
 	}
 
+	
 	/**
 	 * To initialise the database schema. DatabaseConnectionUrl will default to
 	 * localhost.
@@ -192,24 +267,25 @@ public class Ims {
 	/**
 	 * To close the database on user choosing EXIT
 	 */
-	public void closeDb  (String username, String password){
+	public void closeDb(String username, String password) {
 		closeDb("jdbc:mysql://" + Utils.MYSQL_URL + "/", username, password);
 	}
-	public void closeDb (String jdbcConnectionUrl, String username, String password){
-		Connection connection  = null;
+
+	public void closeDb(String jdbcConnectionUrl, String username, String password) {
+		Connection connection = null;
 		try {
 			connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
-		}catch (SQLException e) {
-			
+		} catch (SQLException e) {
+
 			LOGGER.error(e.getMessage());
-		}finally {
+		} finally {
 			try {
 				if (connection != null) {
 					LOGGER.info("Exiting database...");
 					connection.close();
 				}
-			}catch (SQLException e) {
-				
+			} catch (SQLException e) {
+
 				LOGGER.error(e.getMessage());
 			}
 		}

@@ -6,7 +6,8 @@ public class Utils {
 
 	public static final String MYSQL_URL = "34.105.145.205:3306";
 	public static final Scanner SCANNER = new Scanner(System.in);
-
+	public static final String READ = "READ";
+	
 	private Utils() {
 
 	}
@@ -15,4 +16,10 @@ public class Utils {
 		return SCANNER.nextLine();
 	}
 
+	public static String getRead() {
+		return READ;
+	}
+	
+	
+	
 }

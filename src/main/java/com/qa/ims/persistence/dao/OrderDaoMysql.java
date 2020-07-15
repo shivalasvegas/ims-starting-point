@@ -104,9 +104,7 @@ public class OrderDaoMysql implements Dao<Order> {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
 
-			statement.executeUpdate(
-					"UPDATE orders ord INNER JOIN orderlines ordlines ON ordlines.orderlines_id = ord.fk_orderlines_id SET ord.order_total = (SELECT SUM(ordlines.product_total FROM orderlines WHERE ordlines.fk_order_id = " + order_id);
-
+			statement.executeUpdate("UPDATE orders SET order_total = (SELECT SUM(product_total) AS total  FROM orderlines WHERE fk_order_id = " + order_id + ") WHERE order_id  =" + order_id);
 			
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());

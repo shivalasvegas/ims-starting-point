@@ -94,6 +94,7 @@ public class Order {
 			this.fk_orderline_id = fk_orderline_id;
 		}
 		
+		
 		//Hashcode and equals
 		@Override
 		public int hashCode() {
@@ -108,6 +109,14 @@ public class Order {
 			result = prime * result + (int) (temp ^ (temp >>> 32));
 			return result;
 		}
+		
+		
+		//String-to-String
+		@Override
+		public String toString() {
+			return "Order [order_id=" + order_id + ", order_date=" + order_date + ", order_total=" + order_total + "]";
+		}
+		
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)

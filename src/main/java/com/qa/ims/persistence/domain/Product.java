@@ -68,6 +68,15 @@ public class Product {
 			this.product_price = product_price;
 		}
 
+		// string to string 
+		
+		@Override
+		public String toString() {
+			return "Product [product_id=" + product_id + ", product_name=" + product_name + ", product_price="
+					+ product_price + "]";
+		}
+
+
 		//override hashcode and equals 
 		@Override
 		public int hashCode() {

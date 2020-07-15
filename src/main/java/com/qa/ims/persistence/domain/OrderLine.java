@@ -96,8 +96,13 @@ public class OrderLine {
 				this.product_total = product_total;
 			}
 			
+			// string to string
+			@Override
+			public String toString() {
+				return "OrderLine [orderLine_id=" + orderLine_id + ", product_qty=" + product_qty + ", product_total="
+						+ product_total + "]";
+			}
 			// hashcode and equals
-
 			@Override
 			public int hashCode() {
 				final int prime = 31;

@@ -44,7 +44,8 @@ public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 		String order_date = getInput();
 		LOGGER.info("Please enter the customer id");
 		Long fk_customer_id = Long.valueOf(getInput());	
-		Order order = orderService.create(new Order(order_date, fk_customer_id));
+		double order_total = 0.00;
+		Order order = orderService.create(new Order(order_date, order_total, fk_customer_id));
 		LOGGER.info("Order created");
 		return order;
 	}

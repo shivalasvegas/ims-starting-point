@@ -1,12 +1,11 @@
 package com.qa.ims.persistence.domain;
 
-import  java.time.LocalDate;
 
 public class Order {
 	// variables
 		private Long order_id;
 		private String order_date;
-		private double order_total;
+		private double order_total = 0.00;
 		private Long fk_customer_id;
 		private Long fk_orderline_id;
 		
@@ -29,6 +28,12 @@ public class Order {
 		}
 		
 		public Order(String order_date, Long fk_customer_id) {
+			this.order_date = order_date;
+			this.fk_customer_id = fk_customer_id;
+			
+		}
+		
+		public Order(String order_date, double order_total, Long fk_customer_id) {
 			this.order_date = order_date;
 			this.fk_customer_id = fk_customer_id;
 			
@@ -67,12 +72,6 @@ public class Order {
 		}
 		public void setOrder_date(String order_date) {
 			this.order_date = order_date;
-		}
-		
-		// convert string date to date format
-		public LocalDate getOrder_localDate() {
-			LocalDate date = LocalDate.parse(order_date);
-			return date;
 		}
 		
 		

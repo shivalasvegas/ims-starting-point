@@ -48,7 +48,8 @@ public static final Logger LOGGER = Logger.getLogger(OrderLineController.class);
 		Long fk_product_id = Long.valueOf(getInput());
 		LOGGER.info("Please enter the product quantity");
 		Long product_qty = Long.valueOf(getInput());
-		OrderLine orderLine = orderLineService.create(new OrderLine(fk_customer_id, fk_order_id, fk_product_id, product_qty));
+		double product_total = 0.00;
+		OrderLine orderLine = orderLineService.create(new OrderLine(fk_customer_id, fk_order_id, fk_product_id, product_qty, product_total));
 		LOGGER.info("OrderLine created");
 		return orderLine;
 	}

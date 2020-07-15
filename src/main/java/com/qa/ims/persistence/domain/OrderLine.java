@@ -7,7 +7,7 @@ public class OrderLine {
 			private Long fk_order_id;
 			private Long fk_product_id;			
 			private Long product_qty;
-			private double product_total;
+			private double product_total = 0.00;
 
 			// constructors
 			public OrderLine() {	

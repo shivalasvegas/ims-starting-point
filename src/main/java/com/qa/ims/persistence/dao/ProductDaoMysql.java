@@ -68,7 +68,7 @@ public class ProductDaoMysql implements Dao<Product>{
 	public Product readLatest() {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM products ORDER BY productId DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM products ORDER BY product_id DESC LIMIT 1");) {
 			resultSet.next();
 			return productFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -87,7 +87,7 @@ public class ProductDaoMysql implements Dao<Product>{
 	public Product create(Product product) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("Insert into products(productName, productPrice, fkCategoryId) values('"
+			statement.executeUpdate("Insert into products(product_name, product_price, fk_category_id) values('"
 				+ product.getProductName()  
 				+ "','" + product.getProductPrice()
 				+ "','" + product.getFkCategoryId()
@@ -104,7 +104,7 @@ public class ProductDaoMysql implements Dao<Product>{
 	public Product readProduct(Long productId) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT FROM products where id = " + productId);) {
+				ResultSet resultSet = statement.executeQuery("SELECT FROM products where product_id = " + productId);) {
 			resultSet.next();
 			return productFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -125,11 +125,11 @@ public class ProductDaoMysql implements Dao<Product>{
 	public Product update(Product product) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update products set productName ='" 
+			statement.executeUpdate("update products set product_name ='" 
 				+ product.getProductName()
-				+ "', productPrice = '" + product.getProductPrice()
-				+ "', fkCategoryId = '" + product.getFkCategoryId() 
-				+ "' where id =" + product.getId());
+				+ "', product_price = '" + product.getProductPrice()
+				+ "', fk_category_id = '" + product.getFkCategoryId() 
+				+ "' where product_id =" + product.getId());
 			return readProduct(product.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -148,7 +148,7 @@ public class ProductDaoMysql implements Dao<Product>{
 	public void delete(long productId) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from products where id = " + productId);
+			statement.executeUpdate("delete from products where product_id = " + productId);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());

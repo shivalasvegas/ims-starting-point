@@ -3,95 +3,95 @@ package com.qa.ims.persistence.domain;
 
 public class Order {
 	// variables
-		private Long order_id;
-		private String order_date;
-		private double order_total = 0.00;
-		private Long fk_customer_id;
-		private Long fk_orderline_id;
+		private Long orderId;
+		private String orderDate;
+		private double orderTotal = 0.00;
+		private Long fkCustomerId;
+		private Long fkOrderlineId;
 		
 
 		// constructors
 		public Order() {
 			
 		}
-		public Order(String order_date, double order_total) {
-			this.order_date = order_date;
-			this.order_total = order_total;
+		public Order(String orderDate, double orderTotal) {
+			this.orderDate = orderDate;
+			this.orderTotal = orderTotal;
 		}
 		
-		public Order(String order_date, double order_total, Long fk_customer_id, Long fk_orderline_id) {
-			this.order_date = order_date;
-			this.order_total = order_total;
-			this.fk_customer_id = fk_customer_id;
-			this.fk_orderline_id = fk_orderline_id;
+		public Order(String orderDate, double orderTotal, Long fkCustomerId, Long fkOrderlineId) {
+			this.orderDate = orderDate;
+			this.orderTotal = orderTotal;
+			this.fkCustomerId = fkCustomerId;
+			this.fkOrderlineId = fkOrderlineId;
 			
 		}
 		
-		public Order(String order_date, Long fk_customer_id) {
-			this.order_date = order_date;
-			this.fk_customer_id = fk_customer_id;
+		public Order(String orderDate, Long fkCustomerId) {
+			this.orderDate = orderDate;
+			this.fkCustomerId = fkCustomerId;
 			
 		}
 		
-		public Order(String order_date, double order_total, Long fk_customer_id) {
-			this.order_date = order_date;
-			this.fk_customer_id = fk_customer_id;
+		public Order(String orderDate, double orderTotal, Long fkCustomerId) {
+			this.orderDate = orderDate;
+			this.fkCustomerId = fkCustomerId;
 			
 		}
 
-		public Order(Long order_id, String order_date, Long fk_customer_id) {
-			this.order_id = order_id;
-			this.order_date = order_date;
-			this.fk_customer_id = fk_customer_id;
+		public Order(Long orderId, String orderDate, Long fkCustomerId) {
+			this.orderId = orderId;
+			this.orderDate = orderDate;
+			this.fkCustomerId = fkCustomerId;
 		
 		
 		}
-		public Order(Long order_id, String order_date, double order_total) {
-			this.order_id = order_id;
-			this.order_date = order_date;
-			this.order_total = order_total;
+		public Order(Long orderId, String orderDate, double orderTotal) {
+			this.orderId = orderId;
+			this.orderDate = orderDate;
+			this.orderTotal = orderTotal;
 		}
 
-		public Order(Long order_id, String order_date, Long fk_customer_id, Long fk_orderline_id) {
-			this.order_id = order_id;
-			this.order_date = order_date;
-			this.fk_customer_id = fk_customer_id;
-			this.fk_orderline_id = fk_orderline_id;
+		public Order(Long orderId, String orderDate, Long fkCustomerId, Long fkOrderlineId) {
+			this.orderId = orderId;
+			this.orderDate = orderDate;
+			this.fkCustomerId = fkCustomerId;
+			this.fkOrderlineId = fkOrderlineId;
 			
 		}
 		
 		// getters and setters
 		public Long getId() {
-			return order_id;
+			return orderId;
 		}
-		public void setId(Long order_id) {
-			this.order_id = order_id;
+		public void setId(Long orderId) {
+			this.orderId = orderId;
 		}
-		public String getOrder_date() {
-			return order_date;
+		public String getOrderDate() {
+			return orderDate;
 		}
-		public void setOrder_date(String order_date) {
-			this.order_date = order_date;
+		public void setOrderDate(String orderDate) {
+			this.orderDate = orderDate;
 		}
 		
 		
-		public double getOrder_total() {
-			return order_total;
+		public double getOrderTotal() {
+			return orderTotal;
 		}
-		public void setOrder_total(double order_total) {
-			this.order_total = order_total;
+		public void setOrderTotal(double orderTotal) {
+			this.orderTotal = orderTotal;
 		}
-		public Long getFk_customer_id() {
-			return fk_customer_id;
+		public Long getFkCustomerId() {
+			return fkCustomerId;
 		}
-		public void setFk_customer_id(Long fk_customer_id) {
-			this.fk_customer_id = fk_customer_id;
+		public void setFkCustomerId(Long fkCustomerId) {
+			this.fkCustomerId = fkCustomerId;
 		}
 		public Long getFk_product_id() {
-			return fk_orderline_id;
+			return fkOrderlineId;
 		}
-		public void setFk_product_id(Long fk_orderline_id) {
-			this.fk_orderline_id = fk_orderline_id;
+		public void setFk_product_id(Long fkOrderlineId) {
+			this.fkOrderlineId = fkOrderlineId;
 		}
 		
 		
@@ -100,12 +100,12 @@ public class Order {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((fk_customer_id == null) ? 0 : fk_customer_id.hashCode());
-			result = prime * result + ((fk_orderline_id == null) ? 0 : fk_orderline_id.hashCode());
-			result = prime * result + ((order_date == null) ? 0 : order_date.hashCode());
-			result = prime * result + ((order_id == null) ? 0 : order_id.hashCode());
+			result = prime * result + ((fkCustomerId == null) ? 0 : fkCustomerId.hashCode());
+			result = prime * result + ((fkOrderlineId == null) ? 0 : fkOrderlineId.hashCode());
+			result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());
+			result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
 			long temp;
-			temp = Double.doubleToLongBits(order_total);
+			temp = Double.doubleToLongBits(orderTotal);
 			result = prime * result + (int) (temp ^ (temp >>> 32));
 			return result;
 		}
@@ -114,7 +114,7 @@ public class Order {
 		//String-to-String
 		@Override
 		public String toString() {
-			return "Order [order_id=" + order_id + ", order_date=" + order_date + ", order_total=" + order_total + "]";
+			return "Order [orderId=" + orderId + ", orderDate=" + orderDate + ", orderTotal=" + orderTotal + "]";
 		}
 		
 		@Override
@@ -126,27 +126,27 @@ public class Order {
 			if (getClass() != obj.getClass())
 				return false;
 			Order other = (Order) obj;
-			if (fk_customer_id == null) {
-				if (other.fk_customer_id != null)
+			if (fkCustomerId == null) {
+				if (other.fkCustomerId != null)
 					return false;
-			} else if (!fk_customer_id.equals(other.fk_customer_id))
+			} else if (!fkCustomerId.equals(other.fkCustomerId))
 				return false;
-			if (fk_orderline_id == null) {
-				if (other.fk_orderline_id != null)
+			if (fkOrderlineId == null) {
+				if (other.fkOrderlineId != null)
 					return false;
-			} else if (!fk_orderline_id.equals(other.fk_orderline_id))
+			} else if (!fkOrderlineId.equals(other.fkOrderlineId))
 				return false;
-			if (order_date == null) {
-				if (other.order_date != null)
+			if (orderDate == null) {
+				if (other.orderDate != null)
 					return false;
-			} else if (!order_date.equals(other.order_date))
+			} else if (!orderDate.equals(other.orderDate))
 				return false;
-			if (order_id == null) {
-				if (other.order_id != null)
+			if (orderId == null) {
+				if (other.orderId != null)
 					return false;
-			} else if (!order_id.equals(other.order_id))
+			} else if (!orderId.equals(other.orderId))
 				return false;
-			if (Double.doubleToLongBits(order_total) != Double.doubleToLongBits(other.order_total))
+			if (Double.doubleToLongBits(orderTotal) != Double.doubleToLongBits(other.orderTotal))
 				return false;
 			return true;
 		}

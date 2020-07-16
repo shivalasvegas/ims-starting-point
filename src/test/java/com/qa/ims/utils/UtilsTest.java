@@ -7,6 +7,7 @@ import static org.junit.Assert.assertFalse;
 
 public class UtilsTest {
 	
+	// need to change Utils() to public in Utils class to run
 	Utils utils = new Utils();
 	
 	

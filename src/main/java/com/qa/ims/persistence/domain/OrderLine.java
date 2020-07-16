@@ -1,49 +1,54 @@
 package com.qa.ims.persistence.domain;
 
+
+
 public class OrderLine {
+	
+	
+	
 	// variables
 			private Long orderLine_id;
-			private Long fk_customer_id;
-			private Long fk_order_id;
-			private Long fk_product_id;			
-			private Long product_qty;
-			private double product_total = 0.00;
+			private Long fkCustomerId;
+			private Long fkOrderId;
+			private Long fkProductId;			
+			private Long productQty;
+			private double productTotal = 0.00;
 
 			// constructors
 			public OrderLine() {	
 			}
 			
-			public OrderLine(Long fk_customer_id, Long fk_order_id, Long fk_product_id, Long product_qty) {
-				this.fk_customer_id = fk_customer_id;
-				this.fk_order_id = fk_order_id;
-				this.fk_product_id = fk_product_id;
-				this.product_qty = product_qty;
+			public OrderLine(Long fkCustomerId, Long fkOrderId, Long fkProductId, Long productQty) {
+				this.fkCustomerId = fkCustomerId;
+				this.fkOrderId = fkOrderId;
+				this.fkProductId = fkProductId;
+				this.productQty = productQty;
 	
 			}
 			
-			public OrderLine(Long orderLine_id, Long fk_customer_id, Long fk_order_id, Long fk_product_id, Long product_qty) {
+			public OrderLine(Long orderLine_id, Long fkCustomerId, Long fkOrderId, Long fkProductId, Long productQty) {
 				this.orderLine_id = orderLine_id;
-				this.fk_customer_id = fk_customer_id;
-				this.fk_order_id = fk_order_id;
-				this.fk_product_id = fk_product_id;
-				this.product_qty = product_qty;
+				this.fkCustomerId = fkCustomerId;
+				this.fkOrderId = fkOrderId;
+				this.fkProductId = fkProductId;
+				this.productQty = productQty;
 			}
 			
-			public OrderLine(Long fk_customer_id, Long fk_order_id, Long fk_product_id, Long product_qty, double product_total) {
-				this.fk_customer_id = fk_customer_id;
-				this.fk_order_id = fk_order_id;
-				this.fk_product_id = fk_product_id;
-				this.product_qty = product_qty;
-				this.product_total = product_total;
+			public OrderLine(Long fkCustomerId, Long fkOrderId, Long fkProductId, Long productQty, double productTotal) {
+				this.fkCustomerId = fkCustomerId;
+				this.fkOrderId = fkOrderId;
+				this.fkProductId = fkProductId;
+				this.productQty = productQty;
+				this.productTotal = productTotal;
 			}
 			
-			public OrderLine(Long orderLine_id, Long fk_customer_id, Long fk_order_id, Long fk_product_id, Long product_qty, double product_total) {
+			public OrderLine(Long orderLine_id, Long fkCustomerId, Long fkOrderId, Long fkProductId, Long productQty, double productTotal) {
 				this.orderLine_id = orderLine_id;
-				this.fk_customer_id = fk_customer_id;
-				this.fk_order_id = fk_order_id;
-				this.fk_product_id = fk_product_id;
-				this.product_qty = product_qty;
-				this.product_total = product_total;
+				this.fkCustomerId = fkCustomerId;
+				this.fkOrderId = fkOrderId;
+				this.fkProductId = fkProductId;
+				this.productQty = productQty;
+				this.productTotal = productTotal;
 			}
 
 			
@@ -56,64 +61,64 @@ public class OrderLine {
 				this.orderLine_id = orderLine_id;
 			}
 
-			public Long getFk_customer_id() {
-				return fk_customer_id;
+			public Long getFkCustomerId() {
+				return fkCustomerId;
 			}
 
-			public void setFk_customer_id(Long fk_customer_id) {
-				this.fk_customer_id = fk_customer_id;
+			public void setFkCustomerId(Long fkCustomerId) {
+				this.fkCustomerId = fkCustomerId;
 			}
 
-			public Long getFk_order_id() {
-				return fk_order_id;
+			public Long getFkOrderId() {
+				return fkOrderId;
 			}
 
-			public void setFk_order_id(Long fk_order_id) {
-				this.fk_order_id = fk_order_id;
+			public void setFkOrderId(Long fkOrderId) {
+				this.fkOrderId = fkOrderId;
 			}
 
-			public Long getFk_product_id() {
-				return fk_product_id;
+			public Long getFkProductId() {
+				return fkProductId;
 			}
 
-			public void setFk_product_id(Long fk_product_id) {
-				this.fk_product_id = fk_product_id;
+			public void setFkProductId(Long fkProductId) {
+				this.fkProductId = fkProductId;
 			}
 
-			public Long getProduct_qty() {
-				return product_qty;
+			public Long getProductQty() {
+				return productQty;
 			}
 
-			public void setProduct_qty(Long product_qty) {
-				this.product_qty = product_qty;
+			public void setProductQty(Long productQty) {
+				this.productQty = productQty;
 			}
 
-			public double getProduct_total() {
-				return product_total;
+			public double getProductTotal() {
+				return productTotal;
 			}
 
-			public void setProduct_total(double product_total) {
-				this.product_total = product_total;
+			public void setProductTotal(double productTotal) {
+				this.productTotal = productTotal;
 			}
 			
 			// string to string
 			@Override
 			public String toString() {
-				return "OrderLine [orderLine_id=" + orderLine_id + ", product_qty=" + product_qty + ", product_total="
-						+ product_total + "]";
+				return "OrderLine [orderLine_id=" + orderLine_id + ", productQty=" + productQty + ", productTotal="
+						+ productTotal + "]";
 			}
 			// hashcode and equals
 			@Override
 			public int hashCode() {
 				final int prime = 31;
 				int result = 1;
-				result = prime * result + ((fk_customer_id == null) ? 0 : fk_customer_id.hashCode());
-				result = prime * result + ((fk_order_id == null) ? 0 : fk_order_id.hashCode());
-				result = prime * result + ((fk_product_id == null) ? 0 : fk_product_id.hashCode());
+				result = prime * result + ((fkCustomerId == null) ? 0 : fkCustomerId.hashCode());
+				result = prime * result + ((fkOrderId == null) ? 0 : fkOrderId.hashCode());
+				result = prime * result + ((fkProductId == null) ? 0 : fkProductId.hashCode());
 				result = prime * result + ((orderLine_id == null) ? 0 : orderLine_id.hashCode());
-				result = prime * result + ((product_qty == null) ? 0 : product_qty.hashCode());
+				result = prime * result + ((productQty == null) ? 0 : productQty.hashCode());
 				long temp;
-				temp = Double.doubleToLongBits(product_total);
+				temp = Double.doubleToLongBits(productTotal);
 				result = prime * result + (int) (temp ^ (temp >>> 32));
 				return result;
 			}
@@ -127,32 +132,32 @@ public class OrderLine {
 				if (getClass() != obj.getClass())
 					return false;
 				OrderLine other = (OrderLine) obj;
-				if (fk_customer_id == null) {
-					if (other.fk_customer_id != null)
+				if (fkCustomerId == null) {
+					if (other.fkCustomerId != null)
 						return false;
-				} else if (!fk_customer_id.equals(other.fk_customer_id))
+				} else if (!fkCustomerId.equals(other.fkCustomerId))
 					return false;
-				if (fk_order_id == null) {
-					if (other.fk_order_id != null)
+				if (fkOrderId == null) {
+					if (other.fkOrderId != null)
 						return false;
-				} else if (!fk_order_id.equals(other.fk_order_id))
+				} else if (!fkOrderId.equals(other.fkOrderId))
 					return false;
-				if (fk_product_id == null) {
-					if (other.fk_product_id != null)
+				if (fkProductId == null) {
+					if (other.fkProductId != null)
 						return false;
-				} else if (!fk_product_id.equals(other.fk_product_id))
+				} else if (!fkProductId.equals(other.fkProductId))
 					return false;
 				if (orderLine_id == null) {
 					if (other.orderLine_id != null)
 						return false;
 				} else if (!orderLine_id.equals(other.orderLine_id))
 					return false;
-				if (product_qty == null) {
-					if (other.product_qty != null)
+				if (productQty == null) {
+					if (other.productQty != null)
 						return false;
-				} else if (!product_qty.equals(other.product_qty))
+				} else if (!productQty.equals(other.productQty))
 					return false;
-				if (Double.doubleToLongBits(product_total) != Double.doubleToLongBits(other.product_total))
+				if (Double.doubleToLongBits(productTotal) != Double.doubleToLongBits(other.productTotal))
 					return false;
 				return true;
 			}

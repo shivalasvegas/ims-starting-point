@@ -23,19 +23,19 @@ public class ProductTest {
 	@Test
 	public void settersTest() {
 		assertNotNull(product.getId());
-		assertNotNull(product.getProduct_name());
-		assertNotNull(product.getProduct_price());
-		assertNotNull(product.getCategory_id());
+		assertNotNull(product.getProductName());
+		assertNotNull(product.getProductPrice());
+		assertNotNull(product.getFkCategoryId());
 		
 		
 		product.setId(null);
 		assertNull(product.getId());
-		product.setProduct_name(null);
-		assertNull(product.getProduct_name());
-		product.setProduct_price((Double) null);
-		assertNull(product.getProduct_price());
-		product.setCategory_id(null);
-		assertNull(product.getCategory_id());
+		product.setProductName(null);
+		assertNull(product.getProductName());
+		product.setProductPrice((Double) null);
+		assertNull(product.getProductPrice());
+		product.setFkCategoryId(null);
+		assertNull(product.getFkCategoryId());
 		
 		
 	}
@@ -53,9 +53,9 @@ public class ProductTest {
 	@Test
 	public void createProductWithId() {
 		assertEquals(1L, product.getId(), 0);
-		assertEquals("Elsa", product.getProduct_name());
-		assertEquals (15.00, product.getProduct_price(), 0.00);
-		assertEquals(2L, product.getCategory_id(), 0);
+		assertEquals("Elsa", product.getProductName());
+		assertEquals (15.00, product.getProductPrice(), 0.00);
+		assertEquals(2L, product.getFkCategoryId(), 0);
 		
 	}
 	
@@ -73,20 +73,20 @@ public class ProductTest {
 	//name tests
 	@Test
 	public void productNameNullButOtherNameNotNull() {
-		product.setProduct_name(null);
+		product.setProductName(null);
 		assertFalse(product.equals(other));
 	}
 	
 	@Test
 	public void productNamesNotEqual() {
-		other.setProduct_name("rhys");
+		other.setProductName("rhys");
 		assertFalse(product.equals(other));
 	}
 	
 	@Test
 	public void checkEqualityBetweenDifferentObjectsNullName() {
-		product.setProduct_name(null);
-		other.setProduct_name(null);
+		product.setProductName(null);
+		other.setProductName(null);
 		assertTrue(product.equals(other));
 	}
 	
@@ -115,41 +115,41 @@ public class ProductTest {
 	@SuppressWarnings("null")
 	@Test
 	public void nullProduct_price() {
-		product.setProduct_price((Double) null);
+		product.setProductPrice((Double) null);
 		assertFalse(product.equals(other));
 	}
 	
 	@SuppressWarnings("null")
 	@Test
 	public void nullProduct_priceOnBoth() {
-		product.setProduct_price((Double) null);
-		other.setProduct_price((Double) null);
+		product.setProductPrice((Double) null);
+		other.setProductPrice((Double) null);
 		assertTrue(product.equals(other));
 	}
 	
 	@Test
 	public void otherProduct_priceDifferent() {
-		other.setProduct_price(25.00);
+		other.setProductPrice(25.00);
 		assertFalse(product.equals(other));
 	}
 	
 	// Category tests
 	@Test
 	public void nullCategory_id() {
-		product.setCategory_id(null);
+		product.setFkCategoryId(null);
 		assertFalse(product.equals(other));
 	}
 	
 	@Test
 	public void nullCategory_idOnBoth() {
-		product.setCategory_id(null);
-		other.setCategory_id(null);
+		product.setFkCategoryId(null);
+		other.setFkCategoryId(null);
 		assertTrue(product.equals(other));
 	}
 	
 	@Test
 	public void otherCategory_idDifferent() {
-		other.setCategory_id(1L);
+		other.setFkCategoryId(1L);
 		assertFalse(product.equals(other));
 	}
 	
@@ -160,17 +160,17 @@ public class ProductTest {
 	public void constructor1WithoutId() {
 		Product product = new Product("Elsa", 15.00);
 		assertNull(product.getId());
-		assertNotNull(product.getProduct_name());
-		assertNotNull(product.getProduct_price());
+		assertNotNull(product.getProductName());
+		assertNotNull(product.getProductPrice());
 	}
 	
 	@Test
 	public void constructor2WithoutId() {
 		Product product = new Product("Elsa", 15.00, 1L);
 		assertNull(product.getId());
-		assertNotNull(product.getProduct_name());
-		assertNotNull(product.getProduct_price());
-		assertNotNull(product.getCategory_id());
+		assertNotNull(product.getProductName());
+		assertNotNull(product.getProductPrice());
+		assertNotNull(product.getFkCategoryId());
 	
 	}
 	
@@ -178,8 +178,8 @@ public class ProductTest {
 	public void constructor3WithId() {
 		Product product = new Product(1L, "Elsa", 15.00, 1L);
 		assertNull(product.getId());
-		assertNotNull(product.getProduct_name());
-		assertNotNull(product.getProduct_price());
+		assertNotNull(product.getProductName());
+		assertNotNull(product.getProductPrice());
 	}
 	
 	

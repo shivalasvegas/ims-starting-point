@@ -9,7 +9,7 @@ public class Utils {
 	public static final String READ = "READ";
 	public static final String CALC = "CALC";
 	
-	public Utils() {
+	private Utils() {
 		
 	}
 

@@ -2,78 +2,78 @@ package com.qa.ims.persistence.domain;
 
 public class Product {
 	// variables
-		private Long product_id;
-		private Long fk_category_id;
-		private String product_name;
-		private double product_price;
+		private Long productId;
+		private Long fkCategoryId;
+		private String productName;
+		private double productPrice;
 
 		// constructors
-		public Product(String product_name, double product_price) {
-			this.product_name = product_name;
-			this.product_price = product_price;
+		public Product(String productName, double productPrice) {
+			this.productName = productName;
+			this.productPrice = productPrice;
 		}
 		
 
-		public Product(Long product_id, String product_name, double product_price, Long fk_category_id) {
-			this.product_id = product_id;
-			this.fk_category_id = fk_category_id;
-			this.product_name = product_name;
-			this.product_price = product_price;
+		public Product(Long productId, String productName, double productPrice, Long fkCategoryId) {
+			this.productId = productId;
+			this.fkCategoryId = fkCategoryId;
+			this.productName = productName;
+			this.productPrice = productPrice;
 		}
 
-		public Product(String product_name, double product_price, Long fk_category_id) {
-			this.fk_category_id = fk_category_id;
-			this.product_name = product_name;
-			this.product_price = product_price;
+		public Product(String productName, double productPrice, Long fkCategoryId) {
+			this.fkCategoryId = fkCategoryId;
+			this.productName = productName;
+			this.productPrice = productPrice;
 			
 		}
 
 		//getters and setters
 		public Long getId() {
-			return product_id;
+			return productId;
 		}
 
 
-		public void setId(Long product_id) {
-			this.product_id = product_id;
+		public void setId(Long productId) {
+			this.productId = productId;
 		}
 
 
-		public Long getCategory_id() {
-			return fk_category_id;
+		public Long getFkCategoryId() {
+			return fkCategoryId;
 		}
 
 
-		public void setCategory_id(Long fk_category_id) {
-			this.fk_category_id = fk_category_id;
+		public void setFkCategoryId(Long fkCategoryId) {
+			this.fkCategoryId = fkCategoryId;
 		}
 
 
-		public String getProduct_name() {
-			return product_name;
+		public String getProductName() {
+			return productName;
 		}
 
 
-		public void setProduct_name(String product_name) {
-			this.product_name = product_name;
+		public void setProductName(String productName) {
+			this.productName = productName;
 		}
 
 
-		public double getProduct_price() {
-			return product_price;
+		public double getProductPrice() {
+			return productPrice;
 		}
 
 
-		public void setProduct_price(double product_price) {
-			this.product_price = product_price;
+		public void setProductPrice(double productPrice) {
+			this.productPrice = productPrice;
 		}
 
 		// string to string 
 		
 		@Override
 		public String toString() {
-			return "Product [product_id=" + product_id + ", product_name=" + product_name + ", product_price="
-					+ product_price + "]";
+			return "Product [productId=" + productId + ", productName=" + productName + ", productPrice="
+					+ productPrice + "]";
 		}
 
 
@@ -82,11 +82,11 @@ public class Product {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((fk_category_id == null) ? 0 : fk_category_id.hashCode());
-			result = prime * result + ((product_id == null) ? 0 : product_id.hashCode());
-			result = prime * result + ((product_name == null) ? 0 : product_name.hashCode());
+			result = prime * result + ((fkCategoryId == null) ? 0 : fkCategoryId.hashCode());
+			result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+			result = prime * result + ((productName == null) ? 0 : productName.hashCode());
 			long temp;
-			temp = Double.doubleToLongBits(product_price);
+			temp = Double.doubleToLongBits(productPrice);
 			result = prime * result + (int) (temp ^ (temp >>> 32));
 			return result;
 		}
@@ -101,22 +101,22 @@ public class Product {
 			if (getClass() != obj.getClass())
 				return false;
 			Product other = (Product) obj;
-			if (fk_category_id == null) {
-				if (other.fk_category_id != null)
+			if (fkCategoryId == null) {
+				if (other.fkCategoryId != null)
 					return false;
-			} else if (!fk_category_id.equals(other.fk_category_id))
+			} else if (!fkCategoryId.equals(other.fkCategoryId))
 				return false;
-			if (product_id == null) {
-				if (other.product_id != null)
+			if (productId == null) {
+				if (other.productId != null)
 					return false;
-			} else if (!product_id.equals(other.product_id))
+			} else if (!productId.equals(other.productId))
 				return false;
-			if (product_name == null) {
-				if (other.product_name != null)
+			if (productName == null) {
+				if (other.productName != null)
 					return false;
-			} else if (!product_name.equals(other.product_name))
+			} else if (!productName.equals(other.productName))
 				return false;
-			if (Double.doubleToLongBits(product_price) != Double.doubleToLongBits(other.product_price))
+			if (Double.doubleToLongBits(productPrice) != Double.doubleToLongBits(other.productPrice))
 				return false;
 			return true;
 		}

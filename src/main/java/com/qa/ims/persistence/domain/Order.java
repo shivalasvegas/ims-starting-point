@@ -7,7 +7,7 @@ public class Order {
 		private String orderDate;
 		private double orderTotal = 0.00;
 		private Long fkCustomerId;
-		private Long fkOrderlineId;
+
 		
 
 		// constructors
@@ -19,11 +19,11 @@ public class Order {
 			this.orderTotal = orderTotal;
 		}
 		
-		public Order(String orderDate, double orderTotal, Long fkCustomerId, Long fkOrderlineId) {
+		public Order(String orderDate, double orderTotal, Long fkCustomerId) {
 			this.orderDate = orderDate;
 			this.orderTotal = orderTotal;
 			this.fkCustomerId = fkCustomerId;
-			this.fkOrderlineId = fkOrderlineId;
+
 			
 		}
 		
@@ -33,32 +33,26 @@ public class Order {
 			
 		}
 		
-		public Order(String orderDate, double orderTotal, Long fkCustomerId) {
-			this.orderDate = orderDate;
-			this.fkCustomerId = fkCustomerId;
-			
-		}
-
-		public Order(Long orderId, String orderDate, Long fkCustomerId) {
-			this.orderId = orderId;
-			this.orderDate = orderDate;
-			this.fkCustomerId = fkCustomerId;
 		
-		
-		}
 		public Order(Long orderId, String orderDate, double orderTotal) {
 			this.orderId = orderId;
 			this.orderDate = orderDate;
 			this.orderTotal = orderTotal;
 		}
 
-		public Order(Long orderId, String orderDate, Long fkCustomerId, Long fkOrderlineId) {
+		public Order(Long orderId, String orderDate, Long fkCustomerId) {
 			this.orderId = orderId;
 			this.orderDate = orderDate;
 			this.fkCustomerId = fkCustomerId;
-			this.fkOrderlineId = fkOrderlineId;
-			
 		}
+		
+		public Order(Long orderId, Long fkCustomerId, String orderDate, double orderTotal) {
+			this.orderId = orderId;
+			this.orderDate = orderDate;
+			this.orderTotal = orderTotal;
+			this.fkCustomerId = fkCustomerId;
+		}
+		
 		
 		// getters and setters
 		public Long getId() {
@@ -87,12 +81,7 @@ public class Order {
 		public void setFkCustomerId(Long fkCustomerId) {
 			this.fkCustomerId = fkCustomerId;
 		}
-		public Long getFk_product_id() {
-			return fkOrderlineId;
-		}
-		public void setFk_product_id(Long fkOrderlineId) {
-			this.fkOrderlineId = fkOrderlineId;
-		}
+	
 		
 		
 		//Hashcode and equals
@@ -101,7 +90,6 @@ public class Order {
 			final int prime = 31;
 			int result = 1;
 			result = prime * result + ((fkCustomerId == null) ? 0 : fkCustomerId.hashCode());
-			result = prime * result + ((fkOrderlineId == null) ? 0 : fkOrderlineId.hashCode());
 			result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());
 			result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
 			long temp;
@@ -130,11 +118,6 @@ public class Order {
 				if (other.fkCustomerId != null)
 					return false;
 			} else if (!fkCustomerId.equals(other.fkCustomerId))
-				return false;
-			if (fkOrderlineId == null) {
-				if (other.fkOrderlineId != null)
-					return false;
-			} else if (!fkOrderlineId.equals(other.fkOrderlineId))
 				return false;
 			if (orderDate == null) {
 				if (other.orderDate != null)

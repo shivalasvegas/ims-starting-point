@@ -19,7 +19,7 @@ public class ProductTest {
 		other = new Product(1L, "Elsa", 15.00, 2L);
 	}
 	
-	@SuppressWarnings({ "null", "unused" })
+	
 	@Test
 	public void settersTest() {
 		assertNotNull(product.getId());
@@ -32,12 +32,8 @@ public class ProductTest {
 		assertNull(product.getId());
 		product.setProductName(null);
 		assertNull(product.getProductName());
-		product.setProductPrice((Double) null);
-		assertNull(product.getProductPrice());
 		product.setFkCategoryId(null);
-		assertNull(product.getFkCategoryId());
-		
-		
+		assertNull(product.getFkCategoryId());	
 	}
 	
 	@Test
@@ -112,20 +108,6 @@ public class ProductTest {
 	
 	
 	//Product price tests
-	@SuppressWarnings("null")
-	@Test
-	public void nullProduct_price() {
-		product.setProductPrice((Double) null);
-		assertFalse(product.equals(other));
-	}
-	
-	@SuppressWarnings("null")
-	@Test
-	public void nullProduct_priceOnBoth() {
-		product.setProductPrice((Double) null);
-		other.setProductPrice((Double) null);
-		assertTrue(product.equals(other));
-	}
 	
 	@Test
 	public void otherProduct_priceDifferent() {
@@ -177,7 +159,7 @@ public class ProductTest {
 	@Test
 	public void constructor3WithId() {
 		Product product = new Product(1L, "Elsa", 15.00, 1L);
-		assertNull(product.getId());
+		assertNotNull(product.getId());
 		assertNotNull(product.getProductName());
 		assertNotNull(product.getProductPrice());
 	}
@@ -189,15 +171,6 @@ public class ProductTest {
 		assertEquals(product.hashCode(), other.hashCode());
 	}
 	
-	
-	@SuppressWarnings("null")
-	@Test
-	public void hashCodeTestWithNull() {
-		@SuppressWarnings("null")
-		Product product = new Product(null, (Double) null);
-		Product other = new Product(null, (Double) null);
-		assertEquals(product.hashCode(), other.hashCode());
-	}
 	
 	
 	//to string tests

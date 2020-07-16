@@ -71,7 +71,7 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement
-						.executeQuery("SELECT * FROM orderlines ORDER BY orderLineId DESC LIMIT 1");) {
+						.executeQuery("SELECT * FROM orderlines ORDER BY orderline_id DESC LIMIT 1");) {
 			resultSet.next();
 			return orderLineFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -92,12 +92,12 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 				Statement statement = connection.createStatement();) {
 
 			statement.executeUpdate(
-					"Insert into orderlines(fkCustomerId, fkOrderId, fk_product_id, productQuantity, productTotal) values('"
+					"Insert into orderlines(fk_customer_id, fk_order_id, fk_product_id, product_quantity, product_total) values('"
 							+ orderLine.getFkCustomerId() + "','" + orderLine.getFkOrderId() + "','"
 							+ orderLine.getFkProductId() + "','" + orderLine.getProductQty() + "','" + orderLine.getProductTotal() + "')");
 			
 			statement.executeUpdate(
-					"update orderlines ord inner join products prod on prod.product_id = ord.fk_product_id set ord.productTotal = ord.productQuantity * prod.product_price;");
+					"update orderlines ord inner join products prod on prod.product_id = ord.fk_product_id set ord.product_total = ord.product_quantity * prod.product_price;");
 		
 			return readLatest();
 		} catch (Exception e) {
@@ -132,9 +132,8 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 	public OrderLine update(OrderLine orderLine) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update orderlines set orderLine ='" + "', fkCustomerId = '"
-					+ orderLine.getFkCustomerId() + "', fk_product_id = '" + orderLine.getFkProductId()
-					+ "', productQuantity = '" + orderLine.getProductQty() + "' where orderline_id =" + orderLine.getId());
+			statement.executeUpdate("update orderlines set fk_product_id = '" + orderLine.getFkProductId()
+					+ "', product_quantity = '" + orderLine.getProductQty() + "' where orderline_id =" + orderLine.getId());
 			return readOrderLine(orderLine.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());

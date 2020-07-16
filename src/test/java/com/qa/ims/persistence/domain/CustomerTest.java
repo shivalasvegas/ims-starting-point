@@ -1,5 +1,6 @@
 package com.qa.ims.persistence.domain;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -9,29 +10,42 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class CustomerTest {
+	
+	
 	
 	private Customer customer;
 	private Customer other;
 	
 	@Before
 	public void setUp() {
-		customer = new Customer(1L, "Chris", "Perrins");
-		other = new Customer(1L, "Chris", "Perrins");
+		customer = new Customer(1L, "Chris", "Perrins", "42 The Drive", "chrisP@hotmail.com", "12345");
+		other = new Customer(1L, "Chris", "Perrins", "42 The Drive", "chrisP@hotmail.com", "12345");
 	}
 	
 	@Test
 	public void settersTest() {
 		assertNotNull(customer.getId());
-		assertNotNull(customer.getFirstName());
+		assertNotNull(customer.getForename());
 		assertNotNull(customer.getSurname());
+		assertNotNull(customer.getAddress());
+		assertNotNull(customer.getEmail());
+		assertNotNull(customer.getPassword());
 		
 		customer.setId(null);
 		assertNull(customer.getId());
-		customer.setFirstName(null);
-		assertNull(customer.getFirstName());
+		customer.setForename(null);
+		assertNull(customer.getForename());
 		customer.setSurname(null);
 		assertNull(customer.getSurname());
+		customer.setAddress(null);
+		assertNull(customer.getAddress());
+		customer.setEmail(null);
+		assertNull(customer.getEmail());
+		customer.setPassword(null);
+		assertNull(customer.getPassword());
 		
 	}
 	
@@ -48,8 +62,11 @@ public class CustomerTest {
 	@Test
 	public void createCustomerWithId() {
 		assertEquals(1L, customer.getId(), 0);
-		assertEquals("Chris", customer.getFirstName());
+		assertEquals("Chris", customer.getForename());
 		assertEquals("Perrins", customer.getSurname());
+		assertEquals("42 The Drive", customer.getAddress());
+		assertEquals("chrisP@hotmail.com", customer.getEmail());
+		assertEquals("12345", customer.getPassword());
 	}
 	
 	@Test
@@ -62,25 +79,28 @@ public class CustomerTest {
 		assertTrue(customer.equals(other));
 	}
 	
+	
+	//name tests
 	@Test
 	public void customerNameNullButOtherNameNotNull() {
-		customer.setFirstName(null);
+		customer.setForename(null);
 		assertFalse(customer.equals(other));
 	}
 	
 	@Test
 	public void customerNamesNotEqual() {
-		other.setFirstName("rhys");
+		other.setForename("rhys");
 		assertFalse(customer.equals(other));
 	}
 	
 	@Test
 	public void checkEqualityBetweenDifferentObjectsNullName() {
-		customer.setFirstName(null);
-		other.setFirstName(null);
+		customer.setForename(null);
+		other.setForename(null);
 		assertTrue(customer.equals(other));
 	}
 	
+	//id tests
 	@Test
 	public void nullId() {
 		customer.setId(null);
@@ -100,6 +120,8 @@ public class CustomerTest {
 		assertFalse(customer.equals(other));
 	}
 	
+	
+	//surname tests
 	@Test
 	public void nullSurname() {
 		customer.setSurname(null);
@@ -119,14 +141,97 @@ public class CustomerTest {
 		assertFalse(customer.equals(other));
 	}
 	
+	// address tests
 	@Test
-	public void constructorWithoutId() {
+	public void nullAddress() {
+		customer.setAddress(null);
+		assertFalse(customer.equals(other));
+	}
+	
+	@Test
+	public void nullAddressOnBoth() {
+		customer.setAddress(null);
+		other.setAddress(null);
+		assertTrue(customer.equals(other));
+	}
+	
+	@Test
+	public void otherAddressDifferent() {
+		other.setAddress("23 South Moles");
+		assertFalse(customer.equals(other));
+	}
+	
+	
+	// email tests
+		@Test
+		public void nullEmail() {
+			customer.setEmail(null);
+			assertFalse(customer.equals(other));
+		}
+		
+		@Test
+		public void nullEmailOnBoth() {
+			customer.setEmail(null);
+			other.setEmail(null);
+			assertTrue(customer.equals(other));
+		}
+		
+		@Test
+		public void otherEmailDifferent() {
+			other.setEmail("dizzyP@mac.com");
+			assertTrue(customer.equals(other));
+		}
+		
+		// email password
+				@Test
+				public void nullPassword() {
+					customer.setPassword(null);
+					assertFalse(customer.equals(other));
+				}
+				
+				@Test
+				public void nullPasswordOnBoth() {
+					customer.setPassword(null);
+					other.setPassword(null);
+					assertTrue(customer.equals(other));
+				}
+				
+				@Test
+				public void otherPasswordDifferent() {
+					other.setPassword("45678");
+					assertTrue(customer.equals(other));
+				}
+		
+	//constructor tests
+	@Test
+	public void constructor1WithoutId() {
 		Customer customer = new Customer("Chris", "Perrins");
 		assertNull(customer.getId());
-		assertNotNull(customer.getFirstName());
+		assertNotNull(customer.getForename());
 		assertNotNull(customer.getSurname());
 	}
 	
+	@Test
+	public void constructor2WithoutId() {
+		Customer customer = new Customer("Chris", "Perrins", "42 The Drive", "chrisP@hotmail.com", "12345");
+		assertNull(customer.getId());
+		assertNotNull(customer.getForename());
+		assertNotNull(customer.getSurname());
+		assertNotNull(customer.getAddress());
+		assertNotNull(customer.getEmail());
+		assertNotNull(customer.getPassword());
+	}
+	
+	@Test
+	public void constructor3WithId() {
+		Customer customer = new Customer(1L, "Chris", "Perrins");
+		assertNull(customer.getId());
+		assertNotNull(customer.getForename());
+		assertNotNull(customer.getSurname());
+	}
+	
+	
+	// hashcode
 	@Test
 	public void hashCodeTest() {
 		assertEquals(customer.hashCode(), other.hashCode());
@@ -138,9 +243,11 @@ public class CustomerTest {
 		assertEquals(customer.hashCode(), other.hashCode());
 	}
 	
+	
+	//to string tests
 	@Test
 	public void toStringTest() {
-		String toString = "id:1 first name:Chris surname:Perrins";
+		String toString = "id:1 first name:Chris surname:Perrins address:42 The Drive email:chrisP@hotmail.com password:123435";
 		assertEquals(toString, customer.toString());
 	}
 }

@@ -9,8 +9,8 @@ public class Utils {
 	public static final String READ = "READ";
 	public static final String CALC = "CALC";
 	
-	private Utils() {
-
+	public Utils() {
+		
 	}
 
 	public static String getInput() {

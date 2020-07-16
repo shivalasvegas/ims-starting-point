@@ -1,33 +1,43 @@
 package com.qa.ims.persistence.domain;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 public class DomainTest {
 	
+	Domain domainCustomer = Domain.CUSTOMER;
+	Domain domainItem = Domain.ITEM;
+	Domain domainOrder = Domain.ORDER;
+	Domain domainExit = Domain.EXIT;
+	
 	@Test
 	public void customerTest() {
-		Domain domain = Domain.CUSTOMER;
-		assertTrue(domain.getDescription().toLowerCase().contains("customer"));
+		assertTrue(domainCustomer.getDescription().toLowerCase().contains("customer"));
+		assertFalse(domainItem.getDescription().toLowerCase().contains("customer"));
 	}
+	
 	
 	@Test
 	public void itemTest() {
-		Domain domain = Domain.ITEM;
-		assertTrue(domain.getDescription().toLowerCase().contains("item"));
+
+		assertTrue(domainItem.getDescription().toLowerCase().contains("item"));
 	}
 	
 	@Test
 	public void orderTest() {
-		Domain domain = Domain.ORDER;
-		assertTrue(domain.getDescription().toLowerCase().contains("items"));
+	
+		assertTrue(domainOrder.getDescription().toLowerCase().contains("order"));
 	}
 	
 	@Test
 	public void stopTest() {
-		Domain domain = Domain.EXIT;
-		assertTrue(domain.getDescription().toLowerCase().contains("close"));
+		assertTrue(domainExit.getDescription().toLowerCase().contains("close"));
+		
 	}
+	
 
 }

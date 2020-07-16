@@ -8,16 +8,21 @@ public class Order {
 		private double orderTotal = 0.00;
 		private Long fkCustomerId;
 
-		
-
 		// constructors
-		public Order() {
-			
+		public Order() {			
 		}
+		
 		public Order(String orderDate, double orderTotal) {
 			this.orderDate = orderDate;
 			this.orderTotal = orderTotal;
 		}
+		
+//		public Order(String orderDate, Long fkCustomerId) {
+//			this.orderDate = orderDate;
+//			this.fkCustomerId = fkCustomerId;
+//			
+//		}
+//		
 		
 		public Order(String orderDate, double orderTotal, Long fkCustomerId) {
 			this.orderDate = orderDate;
@@ -27,12 +32,7 @@ public class Order {
 			
 		}
 		
-		public Order(String orderDate, Long fkCustomerId) {
-			this.orderDate = orderDate;
-			this.fkCustomerId = fkCustomerId;
-			
-		}
-		
+
 		
 		public Order(Long orderId, String orderDate, double orderTotal) {
 			this.orderId = orderId;
@@ -75,34 +75,18 @@ public class Order {
 		public void setOrderTotal(double orderTotal) {
 			this.orderTotal = orderTotal;
 		}
-		public Long getFkCustomerId() {
+		
+		public long getFkCustomerId() {		
 			return fkCustomerId;
 		}
 		public void setFkCustomerId(Long fkCustomerId) {
 			this.fkCustomerId = fkCustomerId;
 		}
 	
-		
-		
-		//Hashcode and equals
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((fkCustomerId == null) ? 0 : fkCustomerId.hashCode());
-			result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());
-			result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
-			long temp;
-			temp = Double.doubleToLongBits(orderTotal);
-			result = prime * result + (int) (temp ^ (temp >>> 32));
-			return result;
-		}
-		
-		
 		//String-to-String
 		@Override
 		public String toString() {
-			return "Order [orderId=" + orderId + ", orderDate=" + orderDate + ", orderTotal=" + orderTotal + "]";
+			return "Order:: order id:" + orderId + "  order date:" + orderDate + "  order total:" + orderTotal;
 		}
 		
 		@Override

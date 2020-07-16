@@ -62,8 +62,7 @@ public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 		LOGGER.info("Please enter the customer id");
 		Long fk_customer_id = Long.valueOf(getInput());
 		LOGGER.info("Please enter the orderline id");
-		Long fk_orderLine_id = Long.valueOf(getInput());
-		Order order = orderService.create(new Order(order_id, order_date, fk_customer_id, fk_orderLine_id));
+		Order order = orderService.create(new Order(order_id, order_date, fk_customer_id));
 		LOGGER.info("Order created");
 		return order;
 	}

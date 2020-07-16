@@ -109,7 +109,7 @@ public class CustomerDaoMysql implements Dao<Customer> {
 	public Customer readCustomer(Long customer_id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT FROM customers where id = " + customer_id);) {
+				ResultSet resultSet = statement.executeQuery("SELECT FROM customers where customer_id = " + customer_id);) {
 			resultSet.next();
 			return customerFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -136,7 +136,7 @@ public class CustomerDaoMysql implements Dao<Customer> {
 				+ "', address = '" + customer.getAddress()
 				+ "', email = '" + customer.getEmail()
 				+ "', password = '" + customer.getPassword()
-				+ "' where id =" + customer.getId());
+				+ "' where customer_id =" + customer.getId());
 			return readCustomer(customer.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -155,7 +155,7 @@ public class CustomerDaoMysql implements Dao<Customer> {
 	public void delete(long customer_id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from customers where id = " + customer_id);
+			statement.executeUpdate("delete from customers where customer_id = " + customer_id);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());

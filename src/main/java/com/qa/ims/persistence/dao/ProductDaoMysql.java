@@ -34,12 +34,12 @@ public class ProductDaoMysql implements Dao<Product>{
 
 	
 	Product productFromResultSet(ResultSet resultSet) throws SQLException {
-		Long product_id = resultSet.getLong("product_id");
-		Long fk_category_id = resultSet.getLong("fk_category_id");
-		String product_name = resultSet.getString("product_name");
-		double product_price = resultSet.getDouble("product_price");
+		Long productId = resultSet.getLong("productId");
+		Long fkCategoryId = resultSet.getLong("fkCategoryId");
+		String productName = resultSet.getString("productName");
+		double productPrice = resultSet.getDouble("productPrice");
 		
-		return new Product(product_id, product_name, product_price, fk_category_id);
+		return new Product(productId, productName, productPrice, fkCategoryId);
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class ProductDaoMysql implements Dao<Product>{
 	public Product readLatest() {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM products ORDER BY product_id DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM products ORDER BY productId DESC LIMIT 1");) {
 			resultSet.next();
 			return productFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -87,10 +87,10 @@ public class ProductDaoMysql implements Dao<Product>{
 	public Product create(Product product) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("Insert into products(product_name, product_price, fk_category_id) values('"
-				+ product.getProduct_name()  
-				+ "','" + product.getProduct_price()
-				+ "','" + product.getCategory_id()
+			statement.executeUpdate("Insert into products(productName, productPrice, fkCategoryId) values('"
+				+ product.getProductName()  
+				+ "','" + product.getProductPrice()
+				+ "','" + product.getFkCategoryId()
  				+ "')");
 			return readLatest();
 		} catch (Exception e) {
@@ -101,10 +101,10 @@ public class ProductDaoMysql implements Dao<Product>{
 	}
 
 	// Select from product with id
-	public Product readProduct(Long product_id) {
+	public Product readProduct(Long productId) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT FROM products where id = " + product_id);) {
+				ResultSet resultSet = statement.executeQuery("SELECT FROM products where id = " + productId);) {
 			resultSet.next();
 			return productFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -125,10 +125,10 @@ public class ProductDaoMysql implements Dao<Product>{
 	public Product update(Product product) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update products set product_name ='" 
-				+ product.getProduct_name()
-				+ "', product_price = '" + product.getProduct_price()
-				+ "', fk_category_id = '" + product.getCategory_id() 
+			statement.executeUpdate("update products set productName ='" 
+				+ product.getProductName()
+				+ "', productPrice = '" + product.getProductPrice()
+				+ "', fkCategoryId = '" + product.getFkCategoryId() 
 				+ "' where id =" + product.getId());
 			return readProduct(product.getId());
 		} catch (Exception e) {
@@ -145,10 +145,10 @@ public class ProductDaoMysql implements Dao<Product>{
 	 * @param id - id of the product
 	 */
 	@Override
-	public void delete(long product_id) {
+	public void delete(long productId) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from products where id = " + product_id);
+			statement.executeUpdate("delete from products where id = " + productId);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());

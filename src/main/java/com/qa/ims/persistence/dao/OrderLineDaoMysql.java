@@ -34,13 +34,13 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 	}
 
 	OrderLine orderLineFromResultSet(ResultSet resultSet) throws SQLException {
-		Long orderLine_id = resultSet.getLong("orderLine_id");
-		Long fk_customer_id = resultSet.getLong("fk_customer_id");
-		Long fk_order_id = resultSet.getLong("fk_order_id");
-		Long fk_product_id = resultSet.getLong("fk_product_id");
-		Long product_qty = resultSet.getLong("product_quantity");
-		double product_total = resultSet.getLong("product_total");
-		return new OrderLine(orderLine_id, fk_customer_id, fk_order_id, fk_product_id, product_qty, product_total);
+		Long orderLineId = resultSet.getLong("orderLineId");
+		Long fkCustomerId = resultSet.getLong("fkCustomerId");
+		Long fkOrderId = resultSet.getLong("fkOrderId");
+		Long fkProductId = resultSet.getLong("fkProductId");
+		Long product_qty = resultSet.getLong("productQuantity");
+		double productTotal = resultSet.getLong("productTotal");
+		return new OrderLine(orderLineId, fkCustomerId, fkOrderId, fkProductId, product_qty, productTotal);
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement
-						.executeQuery("SELECT * FROM orderlines ORDER BY orderLine_id DESC LIMIT 1");) {
+						.executeQuery("SELECT * FROM orderlines ORDER BY orderLineId DESC LIMIT 1");) {
 			resultSet.next();
 			return orderLineFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -92,12 +92,12 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 				Statement statement = connection.createStatement();) {
 
 			statement.executeUpdate(
-					"Insert into orderlines(fk_customer_id, fk_order_id, fk_product_id, product_quantity, product_total) values('"
-							+ orderLine.getFk_customer_id() + "','" + orderLine.getFk_order_id() + "','"
-							+ orderLine.getFk_product_id() + "','" + orderLine.getProduct_qty() + "','" + orderLine.getProduct_total() + "')");
+					"Insert into orderlines(fkCustomerId, fkOrderId, fk_product_id, productQuantity, productTotal) values('"
+							+ orderLine.getFkCustomerId() + "','" + orderLine.getFkOrderId() + "','"
+							+ orderLine.getFkProductId() + "','" + orderLine.getProductQty() + "','" + orderLine.getProductTotal() + "')");
 			
 			statement.executeUpdate(
-					"update orderlines ord inner join products prod on prod.product_id = ord.fk_product_id set ord.product_total = ord.product_quantity * prod.product_price;");
+					"update orderlines ord inner join products prod on prod.product_id = ord.fk_product_id set ord.productTotal = ord.productQuantity * prod.product_price;");
 		
 			return readLatest();
 		} catch (Exception e) {
@@ -108,10 +108,10 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 	}
 
 	// Select from orderLine with id
-	public OrderLine readOrderLine(Long orderLine_id) {
+	public OrderLine readOrderLine(Long orderLineId) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT FROM orderlines where orderline_id = " + orderLine_id);) {
+				ResultSet resultSet = statement.executeQuery("SELECT FROM orderlines where orderline_id = " + orderLineId);) {
 			resultSet.next();
 			return orderLineFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -132,9 +132,9 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 	public OrderLine update(OrderLine orderLine) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update orderlines set orderLine ='" + "', fk_customer_id = '"
-					+ orderLine.getFk_customer_id() + "', fk_product_id = '" + orderLine.getFk_product_id()
-					+ "', product_quantity = '" + orderLine.getProduct_qty() + "' where orderline_id =" + orderLine.getId());
+			statement.executeUpdate("update orderlines set orderLine ='" + "', fkCustomerId = '"
+					+ orderLine.getFkCustomerId() + "', fk_product_id = '" + orderLine.getFkProductId()
+					+ "', productQuantity = '" + orderLine.getProductQty() + "' where orderline_id =" + orderLine.getId());
 			return readOrderLine(orderLine.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -150,10 +150,10 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 	 * @param id - id of the orderLine
 	 */
 	@Override
-	public void delete(long orderLine_id) {
+	public void delete(long orderLineId) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from orderlines where orderline_id = " + orderLine_id);
+			statement.executeUpdate("delete from orderlines where orderline_id = " + orderLineId);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());

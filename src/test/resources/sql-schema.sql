@@ -1,3 +1,2 @@
-create database if not exists ims;
-drop table if exists ims.customers;
-create table ims.customers(id int primary key auto_increment, first_name varchar(40), surname varchar(40));
+create database if not exists ims_test;
+CREATE TABLE IF NOT EXISTS ims_test.customers (customer_id int(11) NOT NULL AUTO_INCREMENT,forename varchar(20) NOT NULL,surname varchar(20) NOT NULL,address varchar(100) NOT NULL,email varchar(20) NOT NULL,password varchar(20) NOT NULL,PRIMARY KEY (customer_id));

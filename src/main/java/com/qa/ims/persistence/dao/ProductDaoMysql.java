@@ -34,10 +34,10 @@ public class ProductDaoMysql implements Dao<Product>{
 
 	
 	Product productFromResultSet(ResultSet resultSet) throws SQLException {
-		Long productId = resultSet.getLong("productId");
-		Long fkCategoryId = resultSet.getLong("fkCategoryId");
-		String productName = resultSet.getString("productName");
-		double productPrice = resultSet.getDouble("productPrice");
+		Long productId = resultSet.getLong("product_id");
+		Long fkCategoryId = resultSet.getLong("fk_category_id");
+		String productName = resultSet.getString("product_name");
+		double productPrice = resultSet.getDouble("product_price");
 		
 		return new Product(productId, productName, productPrice, fkCategoryId);
 	}
@@ -104,7 +104,7 @@ public class ProductDaoMysql implements Dao<Product>{
 	public Product readProduct(Long productId) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT FROM products where product_id = " + productId);) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM products where product_id = " + productId);) {
 			resultSet.next();
 			return productFromResultSet(resultSet);
 		} catch (Exception e) {

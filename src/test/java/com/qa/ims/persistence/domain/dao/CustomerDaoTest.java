@@ -45,7 +45,7 @@ public class CustomerDaoTest {
 	private CustomerController customerController;
 
 	public static final Logger LOGGER = Logger.getLogger(Ims.class);
-	static String jdbcurl = "jdbc:mysql://localhost:3306/ims_test?serverTimezone=UTC";
+	static String jdbcurl = "jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC";
 	static String username = "root";
 	static String password = "root";
 
@@ -53,23 +53,32 @@ public class CustomerDaoTest {
 	@BeforeClass
 	public static void aInit() {
 		Ims ims = new Ims();
-		ims.init("jdbc:mysql://localhost:3306/ims_test?serverTimezone=UTC", "root", "root",
+		ims.init("jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root",
 				"src/test/resources/sql-schema.sql");
 	}
 
 	@Test
 	public void bCreateTest() {
 		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(
-				"jdbc:mysql://localhost:3306/ims_test?serverTimezone=UTC", "root", "root");
+				"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
 		String firstName = "Vinesh";
 		String surname = "Ghela";
-		Customer customer = new Customer(1L, firstName, surname);
+		String address = "42 The pines, Jordan";
+		String email = "vin@gmail.com";
+		String password = "werty123";
+		Customer customer = new Customer(1L, firstName, surname, address, email, password);
 		String firstName2 = "James";
 		String surname2 = "Peach";
-		Customer customer2 = new Customer(2L, firstName2, surname2);
+		String address2 = "3a forbes Row, Darlington";
+		String email2 = "jamesPeachy@hotmail.com";
+		String password2 = "wer56dfdg";
+		Customer customer2 = new Customer(2L, firstName2, surname2, address2, email2, password2);
 		String firstName3 = "Bob";
 		String surname3 = "Perry";
-		Customer customer3 = new Customer(3L, firstName3, surname3);
+		String address3 = "456 Down the Lane";
+		String email3 = "bobbyP@aol.com";
+		String password3 = "gjoghrgwgh";
+		Customer customer3 = new Customer(3L, firstName3, surname3, address3, email3, password3);
 		assertEquals(customer, customerDaoMysql.create(customer));
 		assertEquals(customer2, customerDaoMysql.create(customer2));
 		assertEquals(customer3, customerDaoMysql.create(customer3));
@@ -78,11 +87,11 @@ public class CustomerDaoTest {
 	@Test
 	public void cReadAllTest() {
 		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(
-				"jdbc:mysql://localhost:3306/ims_test?serverTimezone=UTC", "root", "root");
+				"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
 		List<Customer> customers = new ArrayList<>();
-		customers.add(new Customer(1L, "Vinesh", "Ghela"));
-		customers.add(new Customer(2L, "James", "Peach"));
-		customers.add(new Customer(3L, "Bob", "Perry"));
+		customers.add(new Customer(1L, "Vinesh", "Ghela", "42 The pines, Jordan", "vin@gmail.com", "werty123"));
+		customers.add(new Customer(2L, "James", "Peach", "3a forbes Row, Darlington", "jamesPeachy@hotmail.com", "wer56dfdg"));
+		customers.add(new Customer(3L, "Bob", "Perry", "456 Down the Lane",  "bobbyP@aol.com", "gjoghrgwgh"));
 
 		assertEquals(customers, customerDaoMysql.readAll());
 	}
@@ -90,16 +99,16 @@ public class CustomerDaoTest {
 	@Test
 	public void dReadLatestTest() {
 		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(
-				"jdbc:mysql://localhost:3306/ims_test?serverTimezone=UTC", "root", "root");
-		Customer customer = new Customer(3L, "Bob", "Perry");
+				"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
+		Customer customer = new Customer(3L, "Bob", "Perry", "456 Down the Lane",  "bobbyP@aol.com", "gjoghrgwgh");
 		assertEquals(customer, customerDaoMysql.readLatest());
 	}
 
 	@Test
 	public void eReadCustomerTest() {
 		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(
-				"jdbc:mysql://localhost:3306/ims_test?serverTimezone=UTC", "root", "root");
-		Customer customer = new Customer(2L, "James", "Peach");
+				"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
+		Customer customer = new Customer(2L, "James", "Peach", "3a forbes Row, Darlington", "jamesPeachy@hotmail.com", "wer56dfdg");
 		assertEquals(customer, customerDaoMysql.readCustomer(2L));
 	}
 
@@ -110,11 +119,14 @@ public class CustomerDaoTest {
 	@Test
 	public void fUpdateTest() {
 		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(
-				"jdbc:mysql://localhost:3306/ims_test?serverTimezone=UTC", "root", "root");
+				"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
 		Long id = 1L;
 		String firstName = "Vinesh";
 		String surname = "Ghela";
-		Customer customer = new Customer((id), firstName, surname);
+		String address = "42 The pines, Jordan";
+		String email = "vin@gmail.com";
+		String password = "werty123";
+		Customer customer = new Customer((id), firstName, surname, address, email, password);
 		assertEquals(customer, customerDaoMysql.update(customer));
 	}
 
@@ -124,11 +136,11 @@ public class CustomerDaoTest {
 	@Test
 	public void gDeleteTest() {
 		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(
-				"jdbc:mysql://localhost:3306/ims_test?serverTimezone=UTC", "root", "root");
+				"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
 		String id = "3";
 		customerDaoMysql.delete(Long.parseLong(id));
 		List<Customer> customers = new ArrayList<>();
-		customers.add(new Customer(3L, "Bob", "Perry"));
+		customers.add(new Customer(3L, "Bob", "Perry", "456 Down the Lane",  "bobbyP@aol.com", "gjoghrgwgh"));
 		assertEquals(customers, customerDaoMysql.readAll());
 	}
 

@@ -74,12 +74,14 @@ public class Ims {
 			case CUSTOMER:
 				this.customerController = new CustomerController(
 						new CustomerServices(new CustomerDaoMysql(username, password)));
+				keepGoing=true;
 				domainLoop(customerController, action);
 
 				break;
 			case ITEM:
 				this.productController = new ProductController(
 						new ProductServices(new ProductDaoMysql(username, password)));
+				keepGoing=true;
 				domainLoop(productController, action);
 				
 				break;
@@ -94,12 +96,13 @@ public class Ims {
 
 						this.OrderLineController = new OrderLineController(
 								new OrderLineServices(new OrderLineDaoMysql(username, password)));
-						
+						keepGoing=true;
 						doAction(OrderController, action);
 						
 						do {
 							LOGGER.info("Choose from our range of amazing products!");
 							action = Action.getReadAction();
+							keepOnGoing=true;
 							doAction(productControl, action);
 							LOGGER.info("Redirecting you for more order information ...");
 							LOGGER.info("Please enter your detailed order choice below:");	

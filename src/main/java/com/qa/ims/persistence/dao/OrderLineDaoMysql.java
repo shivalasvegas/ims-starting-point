@@ -34,12 +34,12 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 	}
 
 	OrderLine orderLineFromResultSet(ResultSet resultSet) throws SQLException {
-		Long orderLineId = resultSet.getLong("orderLineId");
-		Long fkCustomerId = resultSet.getLong("fkCustomerId");
-		Long fkOrderId = resultSet.getLong("fkOrderId");
-		Long fkProductId = resultSet.getLong("fkProductId");
-		Long product_qty = resultSet.getLong("productQuantity");
-		double productTotal = resultSet.getLong("productTotal");
+		Long orderLineId = resultSet.getLong("orderline_id");
+		Long fkCustomerId = resultSet.getLong("fk_customer_id");
+		Long fkOrderId = resultSet.getLong("fk_order_id");
+		Long fkProductId = resultSet.getLong("fk_product_id");
+		Long product_qty = resultSet.getLong("product_quantity");
+		double productTotal = resultSet.getLong("product_total");
 		return new OrderLine(orderLineId, fkCustomerId, fkOrderId, fkProductId, product_qty, productTotal);
 	}
 
@@ -111,7 +111,7 @@ public class OrderLineDaoMysql implements Dao<OrderLine> {
 	public OrderLine readOrderLine(Long orderLineId) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT FROM orderlines where orderline_id = " + orderLineId);) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM orderlines where orderline_id = " + orderLineId);) {
 			resultSet.next();
 			return orderLineFromResultSet(resultSet);
 		} catch (Exception e) {

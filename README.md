@@ -1,13 +1,14 @@
 Coverage: 34%
 IMS Project
 
-
 IMS is a functional java application, using a GCP instance mysql.
 It uses backend java CRUD statements to modify the GCP Mysql database.
+IMS displays a user menu to the CLI.  Via the CLI you can choose to do CRUD (Create/Read/Update/Delete) tasks for Customers/Items/Orders 
+and also exit the program.  It provides users access to creating and updating orders, items and customers.
 
-You can fork a copy of the program on github: [shivalasavegas](https://github.com/shivalasvegas
+To fork a copy of the application on github: [shivalasavegas](https://github.com/shivalasvegas/ims-starting-point
 
-### Prerequisites
+### Prerequisites for the project
 Jira 
 Git 
 Git bash
@@ -18,15 +19,21 @@ Maven
 Junit
 GCP Mysql instance
 
+### Requirements
+The application requires the following to run:
+Java
+Eclipse (or another IDE)
+Maven
+Junit
+GCP Sql instance
+
+
 ### Installing (Windows)
 Java install: follow instructions https://www.java.com/en/download/help/windows_manual_download.xml
 Eclipse install: https://www.eclipse.org/downloads/
-
-For GCP: find information here: https://cloud.google.com/sql/docs/mysql/quickstart
-Set up an Sql instance from Storage -> SQL
+For GCP: https://cloud.google.com/sql/docs/mysql/quickstart
 Maven install: https://maven.apache.org/guides/getting-started/windows-prerequisites.html
 Junit install: https://junit.org/junit4/faq.html#started_1
-
 
 ### Example from the CLI
 
@@ -67,11 +74,11 @@ example:
 Here the junit test is accessing the CustomerServices class and testing it with mockito.
 
 ### Debugging:
-Eclipse has a neat debugging system ready installed, which can be used in conjuction with Junit tests to find an overall idea of errors and failures.
-lick debug icon to choose which part of the programme you want to focus on.
+Eclipse has a good debugging system, which can be used in conjunction with Junit tests for errors and failures.
+Click the debug icon and choose which part of the programme you want to focus on.
 The errors will be shown on the cli console. To the right the Task List console will show more information.
 You can use the debug too to step into, over or return to different bits of code by using code markers on your code.
-The 
+
 ## Built With
 
 * [Maven](https://maven.apache.org/) - Dependency Management

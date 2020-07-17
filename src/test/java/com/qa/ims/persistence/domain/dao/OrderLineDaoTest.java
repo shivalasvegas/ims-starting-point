@@ -53,75 +53,75 @@ package com.qa.ims.persistence.domain.dao;
 			ims.init("jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root",
 					"src/test/resources/sql-schema.sql");
 		}
+//
+//		@Test
+//		public void bCreateTest() {
+//			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
+//					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
+//			Long fkCustomerId = 1L;
+//			Long fkOrderId = 1L;
+//			Long fkProductId = 1L;
+//			Long productQty = 2L;
+//			double productTotal = 15.00;
+//			OrderLine orderLine = new OrderLine(1L, fkCustomerId, fkOrderId, fkProductId, productQty, productTotal);
+//			Long fkCustomerId2 = 2L;
+//			Long fkOrderId2 = 2L;
+//			Long fkProductId2 = 2L;
+//			Long productQty2 = 3L;
+//			double productTotal2 = 10.00;
+//			OrderLine orderLine2 = new OrderLine(2L, fkCustomerId2, fkOrderId2, fkProductId2, productQty2, productTotal2);
+//			Long fkCustomerId3 = 3L;
+//			Long fkOrderId3 = 3L;
+//			Long fkProductId3 = 3L;
+//			Long productQty3 = 4L;
+//			double productTotal3 = 5.00;
+//			OrderLine orderLine3 = new OrderLine(3L, fkCustomerId3, fkOrderId3, fkProductId3, productQty3, productTotal3);
+//			assertEquals(orderLine, orderLineDaoMysql.create(orderLine));
+//			assertEquals(orderLine2, orderLineDaoMysql.create(orderLine2));
+//			assertEquals(orderLine3, orderLineDaoMysql.create(orderLine3));
+//		}
 
-		@Test
-		public void bCreateTest() {
-			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
-					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			Long fkCustomerId = 1L;
-			Long fkOrderId = 1L;
-			Long fkProductId = 1L;
-			Long productQty = 2L;
-			double productTotal = 15.00;
-			OrderLine orderLine = new OrderLine(1L, fkCustomerId, fkOrderId, fkProductId, productQty, productTotal);
-			Long fkCustomerId2 = 2L;
-			Long fkOrderId2 = 2L;
-			Long fkProductId2 = 2L;
-			Long productQty2 = 3L;
-			double productTotal2 = 10.00;
-			OrderLine orderLine2 = new OrderLine(2L, fkCustomerId2, fkOrderId2, fkProductId2, productQty2, productTotal2);
-			Long fkCustomerId3 = 3L;
-			Long fkOrderId3 = 3L;
-			Long fkProductId3 = 3L;
-			Long productQty3 = 4L;
-			double productTotal3 = 5.00;
-			OrderLine orderLine3 = new OrderLine(3L, fkCustomerId3, fkOrderId3, fkProductId3, productQty3, productTotal3);
-			assertEquals(orderLine, orderLineDaoMysql.create(orderLine));
-			assertEquals(orderLine2, orderLineDaoMysql.create(orderLine2));
-			assertEquals(orderLine3, orderLineDaoMysql.create(orderLine3));
-		}
+//		@Test
+//		public void cReadAllTest() {
+//			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
+//					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
+//			List<OrderLine> orderLines = new ArrayList<>();
+//			orderLines.add(new OrderLine(1L, 1L, 1L, 1L, 2L, 15.00));
+//			orderLines.add(new OrderLine(2L, 2L, 2L, 2L, 3L, 10.00));
+//			orderLines.add(new OrderLine(3L, 3L, 3L, 3L, 3L, 5.00));
+//			
+//			assertNotNull(orderLineDaoMysql.readAll());
+//		}
 
-		@Test
-		public void cReadAllTest() {
-			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
-					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			List<OrderLine> orderLines = new ArrayList<>();
-			orderLines.add(new OrderLine(1L, 1L, 1L, 1L, 2L, 15.00));
-			orderLines.add(new OrderLine(2L, 2L, 2L, 2L, 3L, 10.00));
-			orderLines.add(new OrderLine(3L, 3L, 3L, 3L, 3L, 5.00));
-			
-			assertNotNull(orderLineDaoMysql.readAll());
-		}
-
-		@Test
-		public void dReadLatestTest() {
-			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
-					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			OrderLine orderLine = new OrderLine(3L,3L, 3L, 3L, 3L, 5.00 );
-			assertEquals(orderLine, orderLineDaoMysql.readLatest());
-		}
-
-		@Test
-		public void eReadOrderLineTest() {
-			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
-					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			//OrderLine orderLine = new OrderLine(2L, 2L, 2L, 2L, 3L, 10.00);
-			assertNotNull(orderLineDaoMysql.readOrderLine(2L));
-		}
-
-		@Test
-		public void fUpdateTest() {
-			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
-					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			Long id = 1L;
-			Long fkCustomerId = 1L;
-			Long fkOrderId = 1L;
-			Long fkProductId = 1L;
-			Long productQty = 2L;
-			double productTotal = 15.00;
-			OrderLine orderLine = new OrderLine((id), fkCustomerId, fkOrderId, fkProductId, productQty, productTotal);
-			assertEquals(orderLine, orderLineDaoMysql.update(orderLine));
-		}
+//		@Test
+//		public void dReadLatestTest() {
+//			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
+//					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
+//			OrderLine orderLine = new OrderLine(3L,3L, 3L, 3L, 3L, 5.00 );
+//			assertEquals(orderLine, orderLineDaoMysql.readLatest());
+//		}
+//
+//		@Test
+//		public void eReadOrderLineTest() {
+//			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
+//					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
+//			//OrderLine orderLine = new OrderLine(2L, 2L, 2L, 2L, 3L, 10.00);
+//			assertNotNull(orderLineDaoMysql.readOrderLine(2L));
+//		}
+//
+//		@Test
+//		public void fUpdateTest() {
+//			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
+//					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
+//			Long id = 1L;
+//			Long fkCustomerId = 1L;
+//			Long fkOrderId = 1L;
+//			Long fkProductId = 1L;
+//			Long productQty = 2L;
+//			double productTotal = 15.00;
+//			OrderLine orderLine = new OrderLine((id), fkCustomerId, fkOrderId, fkProductId, productQty, productTotal);
+//			assertEquals(orderLine, orderLineDaoMysql.update(orderLine));
+//		}
 
 
 		@Test

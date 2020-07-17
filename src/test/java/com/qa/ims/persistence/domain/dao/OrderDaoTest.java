@@ -22,10 +22,10 @@ package com.qa.ims.persistence.domain.dao;
 	import org.mockito.junit.MockitoJUnitRunner;
 
 	import com.qa.ims.Ims;
-	import com.qa.ims.controller.CustomerController;
-	import com.qa.ims.persistence.dao.CustomerDaoMysql;
-	import com.qa.ims.persistence.domain.Customer;
-	import com.qa.ims.services.CustomerServices;
+	import com.qa.ims.controller.OrderController;
+	import com.qa.ims.persistence.dao.OrderDaoMysql;
+	import com.qa.ims.persistence.domain.Order;
+	import com.qa.ims.services.OrderServices;
 
 	@RunWith(MockitoJUnitRunner.class)
 	@FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -33,11 +33,11 @@ package com.qa.ims.persistence.domain.dao;
 	public class OrderDaoTest {
 
 		@Mock
-		private CustomerServices orderServices;
+		private OrderServices orderServices;
 
 		@Spy
 		@InjectMocks
-		private CustomerController orderController;
+		private OrderController orderController;
 
 		public static final Logger LOGGER = Logger.getLogger(Ims.class);
 		static String jdbcurl = "jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC";
@@ -54,26 +54,21 @@ package com.qa.ims.persistence.domain.dao;
 
 		@Test
 		public void bCreateTest() {
-			CustomerDaoMysql orderDaoMysql = new CustomerDaoMysql(
+			OrderDaoMysql orderDaoMysql = new OrderDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			String firstName = "Vinesh";
-			String surname = "Ghela";
-			String address = "42 The pines, Jordan";
-			String email = "vin@gmail.com";
-			String password = "werty123";
-			Customer order = new Customer(1L, firstName, surname, address, email, password);
-			String firstName2 = "James";
-			String surname2 = "Peach";
-			String address2 = "3a forbes Row, Darlington";
-			String email2 = "jamesP@hotmail.com";
-			String password2 = "wer56dfdg";
-			Customer order2 = new Customer(2L, firstName2, surname2, address2, email2, password2);
-			String firstName3 = "Bob";
-			String surname3 = "Perry";
-			String address3 = "456 Down the Lane";
-			String email3 = "bobbyP@aol.com";
-			String password3 = "gjoghrgwgh";
-			Customer order3 = new Customer(3L, firstName3, surname3, address3, email3, password3);
+			Long fkCustomerId = 1L;
+			String orderDate = "2020-07-17";
+			double orderTotal = 45.00;
+			//Order order = new Order(3L, 3L,"2017-02-01", 35.00);
+			Order order = new Order(1L, fkCustomerId, orderDate, orderTotal);
+			Long fkCustomerId2 = 2L;
+			String orderDate2 = "2019-09-27";
+			double orderTotal2 = 15.00;
+			Order order2 = new Order(2L, fkCustomerId2, orderDate2, orderTotal2);
+			Long fkCustomerId3 =3L;
+			String orderDate3 = "2017-02-01";
+			double orderTotal3 = 35.00;
+			Order order3 = new Order(3L, fkCustomerId3, orderDate3, orderTotal3);
 			assertEquals(order, orderDaoMysql.create(order));
 			assertEquals(order2, orderDaoMysql.create(order2));
 			assertEquals(order3, orderDaoMysql.create(order3));
@@ -81,55 +76,53 @@ package com.qa.ims.persistence.domain.dao;
 
 		@Test
 		public void cReadAllTest() {
-			CustomerDaoMysql orderDaoMysql = new CustomerDaoMysql(
+			OrderDaoMysql orderDaoMysql = new OrderDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			List<Customer> orders = new ArrayList<>();
-			orders.add(new Customer(1L, "Vinesh", "Ghela", "42 The pines, Jordan", "vin@gmail.com", "werty123"));
-			orders.add(new Customer(2L, "James", "Peach", "3a forbes Row, Darlington", "jamesPeachy@hotmail.com", "wer56dfdg"));
-			orders.add(new Customer(3L, "Bob", "Perry", "456 Down the Lane",  "bobbyP@aol.com", "gjoghrgwgh"));
+			List<Order> orders = new ArrayList<>();
+			orders.add(new Order(1L, 1L,"2020-07-17", 45.00));
+			orders.add(new Order(2L, 2L,"2019-09-27", 15.00));
+			orders.add(new Order(3L, 3L,"2017-02-01", 35.00));
 			
 			assertNotNull(orderDaoMysql.readAll());
 		}
 
 		@Test
 		public void dReadLatestTest() {
-			CustomerDaoMysql orderDaoMysql = new CustomerDaoMysql(
+			OrderDaoMysql orderDaoMysql = new OrderDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			Customer order = new Customer(3L, "Bob", "Perry", "456 Down the Lane",  "bobbyP@aol.com", "gjoghrgwgh");
+			Order order = new Order(3L, 3L,"2017-02-01", 35.00);
 			assertEquals(order, orderDaoMysql.readLatest());
 		}
 
 		@Test
-		public void eReadCustomerTest() {
-			CustomerDaoMysql orderDaoMysql = new CustomerDaoMysql(
+		public void eReadOrderTest() {
+			OrderDaoMysql orderDaoMysql = new OrderDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			Customer order = new Customer(2L, "James", "Peach", "3a forbes Row, Darlington", "jamesPeachy@hotmail.com", "wer56dfdg");
-			assertNotNull(orderDaoMysql.readCustomer(2L));
+			Order order = new Order(2L, 2L,"2019-09-27", 15.00);
+			assertNotNull(orderDaoMysql.readOrder(2L));
 		}
 
 		@Test
 		public void fUpdateTest() {
-			CustomerDaoMysql orderDaoMysql = new CustomerDaoMysql(
+			OrderDaoMysql orderDaoMysql = new OrderDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
 			Long id = 1L;
-			String firstName = "Vinesh";
-			String surname = "Ghela";
-			String address = "42 The pines, Jordan";
-			String email = "vin@gmail.com";
-			String password = "werty123";
-			Customer order = new Customer((id), firstName, surname, address, email, password);
+			Long fkCustomerId = 1L;
+			String orderDate = "2020-07-17";
+			double orderTotal = 45.00;
+			Order order = new Order((id),fkCustomerId, orderDate, orderTotal);
 			assertEquals(order, orderDaoMysql.update(order));
 		}
 
 
 		@Test
 		public void gDeleteTest() {
-			CustomerDaoMysql orderDaoMysql = new CustomerDaoMysql(
+			OrderDaoMysql orderDaoMysql = new OrderDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
 			String id = "3";
 			orderDaoMysql.delete(Long.parseLong(id));
-			List<Customer> orders = new ArrayList<>();
-			orders.add(new Customer(3L, "Bob", "Perry", "456 Down the Lane",  "bobbyP@aol.com", "gjoghrgwgh"));
+			List<Order> orders = new ArrayList<>();
+			orders.add(new Order(3L, 3L,"2017-02-01", 35.00));
 			assertNotNull(orderDaoMysql.readAll());
 		}
 

@@ -1,9 +1,9 @@
 Coverage: 34%
-# Project Title
+IMS Project
 
 One Paragraph of project description goes here
 
-## Getting Started
+IMS is a functional java application, using a GCP instance mysql , methodologies, and technologies, that encapsulates all fundamental modules covered during training.
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 

@@ -30,10 +30,16 @@ private Dao<Product> productDao;
 		productDao.delete(product_id);
 	}
 
+//	@Override
+//	public void calc(Long id, Product product) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+	
 	@Override
-	public void calc(Long id, Product product) {
-		// TODO Auto-generated method stub
-		
+	public Product calc(Long order_id) {
+		return null;
+			
 	}
 	
 }

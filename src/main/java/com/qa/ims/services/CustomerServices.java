@@ -32,8 +32,15 @@ public class CustomerServices implements CrudServices<Customer> {
 		customerDao.delete(customer_id);
 	}
 
+//	@Override
+//	public void calc(Long id, Customer customer) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+	
 	@Override
-	public void calc(Long id, Customer customer) {
+	public Customer calc(Long id) {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

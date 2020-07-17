@@ -63,24 +63,18 @@ package com.qa.ims.persistence.domain.dao;
 		public void bCreateTest() {
 			ProductDaoMysql productDaoMysql = new ProductDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			String firstName = "Vinesh";
-			String surname = "Ghela";
-			String address = "42 The pines, Jordan";
-			String email = "vin@gmail.com";
-			String password = "werty123";
-			Product product = new Product(1L, firstName, surname, address, email, password);
-			String firstName2 = "James";
-			String surname2 = "Peach";
-			String address2 = "3a forbes Row, Darlington";
-			String email2 = "jamesP@hotmail.com";
-			String password2 = "wer56dfdg";
-			Product product2 = new Product(2L, firstName2, surname2, address2, email2, password2);
-			String firstName3 = "Bob";
-			String surname3 = "Perry";
-			String address3 = "456 Down the Lane";
-			String email3 = "bobbyP@aol.com";
-			String password3 = "gjoghrgwgh";
-			Product product3 = new Product(3L, firstName3, surname3, address3, email3, password3);
+			String productName = "Bertie";
+			Long categoryId = 2L;
+			double productPrice = 15.00;
+			Product product = new Product(1L, productName, productPrice, categoryId);
+			String productName2 = "Flo";
+			Long categoryId2 = 3L;
+			double productPrice2 = 5.00;
+			Product product2 = new Product(2L, productName2, productPrice2, categoryId2);
+			String productName3 = "Harvey";
+			Long categoryId3 = 1L;
+			double productPrice3 = 25.00;
+			Product product3 = new Product(3L, productName3, productPrice3, categoryId3);;
 			assertEquals(product, productDaoMysql.create(product));
 			assertEquals(product2, productDaoMysql.create(product2));
 			assertEquals(product3, productDaoMysql.create(product3));
@@ -91,9 +85,9 @@ package com.qa.ims.persistence.domain.dao;
 			ProductDaoMysql productDaoMysql = new ProductDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
 			List<Product> products = new ArrayList<>();
-			products.add(new Product(1L, "Vinesh", "Ghela", "42 The pines, Jordan", "vin@gmail.com", "werty123"));
-			products.add(new Product(2L, "James", "Peach", "3a forbes Row, Darlington", "jamesPeachy@hotmail.com", "wer56dfdg"));
-			products.add(new Product(3L, "Bob", "Perry", "456 Down the Lane",  "bobbyP@aol.com", "gjoghrgwgh"));
+			products.add(new Product(1L, "Bertie",15.00, 2L));
+			products.add(new Product(2L, "Flo", 5.00, 3L));
+			products.add(new Product(3L, "Harvey",25.00, 1L));
 			
 			assertNotNull(productDaoMysql.readAll());
 		}
@@ -102,7 +96,7 @@ package com.qa.ims.persistence.domain.dao;
 		public void dReadLatestTest() {
 			ProductDaoMysql productDaoMysql = new ProductDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			Product product = new Product(3L, "Bob", "Perry", "456 Down the Lane",  "bobbyP@aol.com", "gjoghrgwgh");
+			Product product = new Product(3L, "Harvey",25.00, 1L);
 			assertEquals(product, productDaoMysql.readLatest());
 		}
 
@@ -110,7 +104,7 @@ package com.qa.ims.persistence.domain.dao;
 		public void eReadProductTest() {
 			ProductDaoMysql productDaoMysql = new ProductDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			Product product = new Product(2L, "James", "Peach", "3a forbes Row, Darlington", "jamesPeachy@hotmail.com", "wer56dfdg");
+			Product product = new Product(2L, "Flo", 5.00, 3L);
 			assertNotNull(productDaoMysql.readProduct(2L));
 		}
 
@@ -123,12 +117,10 @@ package com.qa.ims.persistence.domain.dao;
 			ProductDaoMysql productDaoMysql = new ProductDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
 			Long id = 1L;
-			String firstName = "Vinesh";
-			String surname = "Ghela";
-			String address = "42 The pines, Jordan";
-			String email = "vin@gmail.com";
-			String password = "werty123";
-			Product product = new Product((id), firstName, surname, address, email, password);
+			String productName = "Bertie";
+			Long categoryId = 2L;
+			double productPrice = 15.00;
+			Product product = new Product((id), productName, productPrice, categoryId );
 			assertEquals(product, productDaoMysql.update(product));
 		}
 
@@ -142,7 +134,7 @@ package com.qa.ims.persistence.domain.dao;
 			String id = "3";
 			productDaoMysql.delete(Long.parseLong(id));
 			List<Product> products = new ArrayList<>();
-			products.add(new Product(3L, "Bob", "Perry", "456 Down the Lane",  "bobbyP@aol.com", "gjoghrgwgh"));
+			products.add(new Product(3L, "Harvey",25.00, 1L));
 			assertNotNull(productDaoMysql.readAll());
 		}
 

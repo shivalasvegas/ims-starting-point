@@ -13,7 +13,7 @@ public class OrderController implements CrudController<Order>{
 public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 	
 	private CrudServices<Order> orderService;
-	private Order order;
+	Order order;
 	public OrderController(CrudServices<Order> orderService) {
 		this.orderService = orderService;
 	}
@@ -63,7 +63,7 @@ public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 		Long fk_customer_id = Long.valueOf(getInput());
 		LOGGER.info("Please enter the orderline id");
 		Order order = orderService.create(new Order(order_id, order_date, fk_customer_id));
-		LOGGER.info("Order created");
+		LOGGER.info("Order created" + order_id + order_date);
 		return order;
 	}
 
@@ -78,11 +78,24 @@ public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 	}
 
 
+//	@Override
+//	public void calc() {
+//		LOGGER.info("Please enter the id of the order you would like to calculate");
+//		Long order_id = Long.valueOf(getInput());
+//		orderService.calc(order_id, order);
+//		
+//	}
+	
 	@Override
-	public void calc() {
+	public Order calc() {
 		LOGGER.info("Please enter the id of the order you would like to calculate");
 		Long order_id = Long.valueOf(getInput());
-		orderService.calc(order_id, order);
+		
+		LOGGER.info("Order calculated" + orderService.calc(order_id));
+		
+		return orderService.calc(order_id);
+		
+		
 	}
 	
 }

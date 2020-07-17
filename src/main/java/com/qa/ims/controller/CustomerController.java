@@ -92,8 +92,16 @@ public class CustomerController implements CrudController<Customer>{
 	}
 
 
+//	@Override
+//	public void calc() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//	
+	
 	@Override
-	public void calc() {
+	public Customer calc() {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

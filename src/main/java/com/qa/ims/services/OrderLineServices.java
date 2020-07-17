@@ -29,10 +29,17 @@ private Dao<OrderLine> orderLineDao;
 		orderLineDao.delete(orderLine_id);
 	}
 
+//	@Override
+//	public void calc(Long id, OrderLine orderLine) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+	
 	@Override
-	public void calc(Long id, OrderLine orderLine) {
-		// TODO Auto-generated method stub
-		
+public OrderLine calc(Long id) {
+	return null;
+	// TODO Auto-generated method stub
+	
 	}
 
 

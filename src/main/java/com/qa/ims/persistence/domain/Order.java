@@ -5,7 +5,7 @@ public class Order {
 	// variables
 		private Long orderId;
 		private String orderDate;
-		private double orderTotal;
+		private double orderTotal = 0.00;
 		private Long fkCustomerId;
 
 		// constructors
@@ -17,12 +17,6 @@ public class Order {
 			this.orderTotal = orderTotal;
 		}
 		
-//		public Order(String orderDate, Long fkCustomerId) {
-//			this.orderDate = orderDate;
-//			this.fkCustomerId = fkCustomerId;
-//			
-//		}
-//		
 		
 		public Order(String orderDate, double orderTotal, Long fkCustomerId) {
 			this.orderDate = orderDate;
@@ -86,7 +80,7 @@ public class Order {
 		//String-to-String
 		@Override
 		public String toString() {
-			return "Order:: order id:" + orderId + "  order date:" + orderDate + "  order total:" + orderTotal;
+			return "Order:: order id:" + orderId + "  order date:" + orderDate;
 		}
 		
 		@Override

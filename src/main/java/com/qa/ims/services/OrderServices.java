@@ -29,9 +29,14 @@ private Dao<Order> orderDao;
 		orderDao.delete(order_id);
 	}
 
-	@Override
-	public void calc(Long order_id, Order order) {
-		orderDao.calc(order_id, order);	
-	}
+//	@Override
+//	public void calc(Long order_id, Order order) {
+//		orderDao.calc(order_id, order);	
+//	}
 
+	
+@Override
+public Order calc(Long order_id) {
+	return orderDao.calc(order_id);	
+}
 }

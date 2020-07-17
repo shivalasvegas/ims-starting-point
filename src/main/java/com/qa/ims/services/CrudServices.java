@@ -12,6 +12,7 @@ public interface CrudServices<T> {
  
     void delete(Long id);
 
-	void calc(Long id, T t);
+	//void calc(Long id, T t);
+    T calc(Long id);
 
 }

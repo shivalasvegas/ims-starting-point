@@ -67,7 +67,7 @@ public static final Logger LOGGER = Logger.getLogger(ProductController.class);
 		String product_name = getInput();
 		LOGGER.info("Please enter the product price");
 		double product_price = Double.valueOf(getInput());
-		LOGGER.info("Please enter the fk_category_id");
+		LOGGER.info("Please enter the category id");
 		Long fk_category_id = Long.valueOf(getInput());
 		Product product = productService.update(new Product(product_id, product_name, product_price, fk_category_id));
 		LOGGER.info("Product Updated");
@@ -85,11 +85,16 @@ public static final Logger LOGGER = Logger.getLogger(ProductController.class);
 	}
 
 
+//	@Override
+//	public void calc() {
+//		// TODO Auto-generated method stub
+//		
+//	}
 	@Override
-	public void calc() {
+	public Product calc() {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}
-	
 
 }

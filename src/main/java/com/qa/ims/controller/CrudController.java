@@ -12,7 +12,8 @@ public interface CrudController<T> {
      
     T create();
     
-    void calc();
+    //void calc();
+  T calc();
      
     T update();
      

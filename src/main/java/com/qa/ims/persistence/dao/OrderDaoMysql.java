@@ -38,7 +38,8 @@ public class OrderDaoMysql implements Dao<Order> {
 		Long orderId = resultSet.getLong("order_id");
 		String orderDate = resultSet.getString("order_date");
 		Long fkCustomerId = resultSet.getLong("fk_customer_id");
-		return new Order(orderId, orderDate, fkCustomerId);
+		Long orderTotal = resultSet.getLong("order_total");
+		return new Order(orderId,  fkCustomerId, orderDate, orderTotal);
 	}
 
 	/**
@@ -105,11 +106,24 @@ public class OrderDaoMysql implements Dao<Order> {
 				Statement statement = connection.createStatement();) {
 
 			statement.executeUpdate("UPDATE orders SET order_total = (SELECT SUM(product_total) AS total  FROM orderlines WHERE fk_order_id = " + orderId + ") WHERE order_id  =" + orderId);
-			LOGGER.info("Your order total is: " + order.getOrderTotal());
+
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
 		}
+	}
+	
+	public Order calc(long orderId) {
+		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
+				Statement statement = connection.createStatement();) {
+
+			statement.executeUpdate("UPDATE orders SET order_total = (SELECT SUM(product_total) AS total  FROM orderlines WHERE fk_order_id = " + orderId + ") WHERE order_id  =" + orderId);
+			return readLatest();
+		} catch (Exception e) {
+			LOGGER.debug(e.getStackTrace());
+			LOGGER.error(e.getMessage());
+		}
+		return null;
 	}
 
 	// Select from order with id

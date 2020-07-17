@@ -44,7 +44,7 @@ public static final Logger LOGGER = Logger.getLogger(OrderLineController.class);
 		Long fk_customer_id = Long.valueOf(getInput());
 		LOGGER.info("Please enter the order id");
 		Long fk_order_id = Long.valueOf(getInput());
-		LOGGER.info("Please enter an product id");
+		LOGGER.info("Please enter the product id");
 		Long fk_product_id = Long.valueOf(getInput());
 		LOGGER.info("Please enter the product quantity");
 		Long product_qty = Long.valueOf(getInput());
@@ -85,11 +85,19 @@ public static final Logger LOGGER = Logger.getLogger(OrderLineController.class);
 	}
 
 
+//	@Override
+//	public void calc() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//	
+
+	
 	@Override
-	public void calc() {
+	public OrderLine calc() {
+		
+		return null;
 		// TODO Auto-generated method stub
 		
 	}
-	
-
 }

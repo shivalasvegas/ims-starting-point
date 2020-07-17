@@ -5,7 +5,7 @@ public class Order {
 	// variables
 		private Long orderId;
 		private String orderDate;
-		private double orderTotal = 0.00;
+		private double orderTotal;
 		private Long fkCustomerId;
 
 		// constructors

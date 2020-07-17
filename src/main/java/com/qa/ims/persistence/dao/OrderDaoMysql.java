@@ -100,12 +100,12 @@ public class OrderDaoMysql implements Dao<Order> {
 	}
 
 
-	public void calc(long orderId) {
+	public void calc(long orderId, Order order) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
 
 			statement.executeUpdate("UPDATE orders SET order_total = (SELECT SUM(product_total) AS total  FROM orderlines WHERE fk_order_id = " + orderId + ") WHERE order_id  =" + orderId);
-			
+			LOGGER.info("Your order total is: " + order.getOrderTotal());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());

@@ -8,7 +8,7 @@ public interface Dao<T> {
      
     T create(T t);
     
-    void calc(long id);
+    void calc(long id, T t);
      
     T update(T t);
      

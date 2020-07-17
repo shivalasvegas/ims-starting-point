@@ -30,8 +30,8 @@ private Dao<Order> orderDao;
 	}
 
 	@Override
-	public void calc(Long order_id) {
-		orderDao.calc(order_id);	
+	public void calc(Long order_id, Order order) {
+		orderDao.calc(order_id, order);	
 	}
 
 }

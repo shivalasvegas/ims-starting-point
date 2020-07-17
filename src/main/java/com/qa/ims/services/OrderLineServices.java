@@ -30,7 +30,7 @@ private Dao<OrderLine> orderLineDao;
 	}
 
 	@Override
-	public void calc(Long id) {
+	public void calc(Long id, OrderLine orderLine) {
 		// TODO Auto-generated method stub
 		
 	}

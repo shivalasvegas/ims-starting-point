@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -54,16 +55,21 @@ public class CustomerDaoMysql implements Dao<Customer> {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("select * from customers");) {
+			
 			ArrayList<Customer> customers = new ArrayList<>();
+			
 			while (resultSet.next()) {
 				customers.add(customerFromResultSet(resultSet));
 			}
+			
+			
 			return customers;
 		} catch (SQLException e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
 		}
-		return new ArrayList<>();
+		//return new ArrayList<>();
+		return Collections.emptyList();
 	}
 
 	// Executes ReadLastest Query on database selects customer at id 1 throws

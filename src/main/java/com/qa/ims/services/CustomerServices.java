@@ -33,7 +33,7 @@ public class CustomerServices implements CrudServices<Customer> {
 	}
 
 	@Override
-	public void calc(Long id) {
+	public void calc(Long id, Customer customer) {
 		// TODO Auto-generated method stub
 		
 	}

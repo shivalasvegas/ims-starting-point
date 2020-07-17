@@ -31,7 +31,7 @@ private Dao<Product> productDao;
 	}
 
 	@Override
-	public void calc(Long id) {
+	public void calc(Long id, Product product) {
 		// TODO Auto-generated method stub
 		
 	}

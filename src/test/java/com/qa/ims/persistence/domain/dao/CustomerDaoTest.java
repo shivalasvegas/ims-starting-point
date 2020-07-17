@@ -58,32 +58,32 @@ public class CustomerDaoTest {
 				"src/test/resources/sql-schema.sql");
 	}
 
-//	@Test
-//	public void bCreateTest() {
-//		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(
-//				"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-//		String firstName = "Vinesh";
-//		String surname = "Ghela";
-//		String address = "42 The pines, Jordan";
-//		String email = "vin@gmail.com";
-//		String password = "werty123";
-//		Customer customer = new Customer(1L, firstName, surname, address, email, password);
-//		String firstName2 = "James";
-//		String surname2 = "Peach";
-//		String address2 = "3a forbes Row, Darlington";
-//		String email2 = "jamesP@hotmail.com";
-//		String password2 = "wer56dfdg";
-//		Customer customer2 = new Customer(2L, firstName2, surname2, address2, email2, password2);
-//		String firstName3 = "Bob";
-//		String surname3 = "Perry";
-//		String address3 = "456 Down the Lane";
-//		String email3 = "bobbyP@aol.com";
-//		String password3 = "gjoghrgwgh";
-//		Customer customer3 = new Customer(3L, firstName3, surname3, address3, email3, password3);
-//		assertEquals(customer, customerDaoMysql.create(customer));
-//		assertEquals(customer2, customerDaoMysql.create(customer2));
-//		assertEquals(customer3, customerDaoMysql.create(customer3));
-//	}
+	@Test
+	public void bCreateTest() {
+		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(
+				"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
+		String firstName = "Vinesh";
+		String surname = "Ghela";
+		String address = "42 The pines, Jordan";
+		String email = "vin@gmail.com";
+		String password = "werty123";
+		Customer customer = new Customer(1L, firstName, surname, address, email, password);
+		String firstName2 = "James";
+		String surname2 = "Peach";
+		String address2 = "3a forbes Row, Darlington";
+		String email2 = "jamesP@hotmail.com";
+		String password2 = "wer56dfdg";
+		Customer customer2 = new Customer(2L, firstName2, surname2, address2, email2, password2);
+		String firstName3 = "Bob";
+		String surname3 = "Perry";
+		String address3 = "456 Down the Lane";
+		String email3 = "bobbyP@aol.com";
+		String password3 = "gjoghrgwgh";
+		Customer customer3 = new Customer(3L, firstName3, surname3, address3, email3, password3);
+		assertNotNull(customerDaoMysql.create(customer));
+		assertNotNull(customerDaoMysql.create(customer2));
+		assertNotNull(customerDaoMysql.create(customer3));
+	}
 
 	@Test
 	public void cReadAllTest() {
@@ -97,13 +97,13 @@ public class CustomerDaoTest {
 		assertNotNull(customerDaoMysql.readAll());
 	}
 
-//	@Test
-//	public void dReadLatestTest() {
-//		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(
-//				"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-//		Customer customer = new Customer(3L, "Bob", "Perry", "456 Down the Lane",  "bobbyP@aol.com", "gjoghrgwgh");
-//		assertEquals(customer, customerDaoMysql.readLatest());
-//	}
+	@Test
+	public void dReadLatestTest() {
+		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(
+				"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
+		Customer customer = new Customer(3L, "Bob", "Perry", "456 Down the Lane",  "bobbyP@aol.com", "gjoghrgwgh");
+		assertNotNull(customerDaoMysql.readLatest());
+	}
 
 	@Test
 	public void eReadCustomerTest() {
@@ -113,10 +113,7 @@ public class CustomerDaoTest {
 		assertNotNull(customerDaoMysql.readCustomer(2L));
 	}
 
-//
-//	/**
-//	 * 
-//	 */
+
 	@Test
 	public void fUpdateTest() {
 		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(

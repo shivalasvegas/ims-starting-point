@@ -9,7 +9,7 @@ public interface Dao<T> {
     T create(T t);
     
     //void calc(long id, T t);
-  T calc(long id);
+    T calc(long id);
      
     T update(T t);
      

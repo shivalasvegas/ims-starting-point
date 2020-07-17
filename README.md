@@ -1,69 +1,77 @@
 Coverage: 34%
 IMS Project
 
-One Paragraph of project description goes here
 
-IMS is a functional java application, using a GCP instance mysql , methodologies, and technologies, that encapsulates all fundamental modules covered during training.
+IMS is a functional java application, using a GCP instance mysql.
+It uses backend java CRUD statements to modify the GCP Mysql database.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+You can fork a copy of the program on github: [shivalasavegas](https://github.com/shivalasvegas
 
 ### Prerequisites
+Jira 
+Git 
+Git bash
+Git hub
+Eclipse
+Java
+Maven
+Junit
+GCP Mysql instance
 
-What things you need to install the software and how to install them
+### Installing (Windows)
+Java install: follow instructions https://www.java.com/en/download/help/windows_manual_download.xml
+Eclipse install: https://www.eclipse.org/downloads/
 
-```
-Give examples
-```
+For GCP: find information here: https://cloud.google.com/sql/docs/mysql/quickstart
+Set up an Sql instance from Storage -> SQL
+Maven install: https://maven.apache.org/guides/getting-started/windows-prerequisites.html
+Junit install: https://junit.org/junit4/faq.html#started_1
 
-### Installing
 
-A step by step series of examples that tell you how to get a development env running
+### Example from the CLI
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+INFO - id:2 forename:Amy surname:Propsaddress: 152 North Ave, Wealdon
+INFO - id:3 forename:Theo surname:Haridesaddress: 23 Princess Ave, Muswill Hill
+INFO - id:4 forename:Asherah surname:Yorkeaddress: 6 School Lane, Lulworth
+INFO - id:6 forename:Florence surname:Doddingsaddress: Castle Heights, Florida
+INFO - id:7 forename:Dave surname:Cormackaddress: The Wispers, Sutton
+INFO - Please make another selection ... 
+INFO - CREATE: To save a new item into the database
+INFO - READ: To read an item from the database
+INFO - UPDATE: To change an item already in the database
+INFO - DELETE: To remove an item from the database
+INFO - RETURN: To return to database selection
+INFO - EXIT: Exit the program
+INFO - CALC: To calculate your order total
 
 ## Running the tests
+You can run tests through eclipse and git bash.
+On git bash:cd ~/Documents/Path/ims-starting-point/src/test/ 
+run: mvn test
 
-Explain how to run the automated tests for this system. Break down into which tests and what they do
+On eclipse with the Maven builder tool installed you can run Junit tests.
+The program can be tested as a whole unit, package, class, or small snippet of code.
+There are different ways to run the tests from eclipse.  
 
 ### Unit Tests 
 
-Explain what these tests test, why and how to run them
+Junit tests are small units of test code that cover specific parts of the main source code.
+example: 
+@Test
+	public void customerServicesCreate() {
+		Order order = new Order(1L, 2L, "2020-07-17", 45.00);
+		orderServices.create(order);
+		Mockito.verify(orderDao, Mockito.times(1)).create(order);
+	}
+	
+Here the junit test is accessing the CustomerServices class and testing it with mockito.
 
-```
-Give an example
-```
-
-### Integration Tests 
-Explain what these tests test, why and how to run them
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
+### Debugging:
+Eclipse has a neat debugging system ready installed, which can be used in conjuction with Junit tests to find an overall idea of errors and failures.
+lick debug icon to choose which part of the programme you want to focus on.
+The errors will be shown on the cli console. To the right the Task List console will show more information.
+You can use the debug too to step into, over or return to different bits of code by using code markers on your code.
+The 
 ## Built With
 
 * [Maven](https://maven.apache.org/) - Dependency Management
@@ -76,6 +84,7 @@ We use [SemVer](http://semver.org/) for versioning.
 
 * **Chris Perrins** - *Initial work* - [christophperrins](https://github.com/christophperrins)
 * **Nick Johnson** - *Refinements* - [nickrstewarttds](https://github.com/nickrstewarttds)
+* **Shiva King** - * Smaller Refinements* - [shivalasavegas](https://github.com/shivalasvegas)
 
 ## License
 

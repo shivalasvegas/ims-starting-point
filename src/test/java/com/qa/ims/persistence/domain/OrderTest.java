@@ -190,7 +190,7 @@ public class OrderTest {
 	@Test
 	public void toStringTest() {
 		String toString  = order.toString();
-		assert(toString.contains("order total"));
+		assert(toString.contains("order date"));
 	}
 
 }

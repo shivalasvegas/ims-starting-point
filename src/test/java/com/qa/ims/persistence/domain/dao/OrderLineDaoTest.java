@@ -44,7 +44,7 @@ package com.qa.ims.persistence.domain.dao;
 		public static final Logger LOGGER = Logger.getLogger(Ims.class);
 		static String jdbcurl = "jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC";
 		static String username = "root";
-		static String password = "root";
+		static String productTotal = "root";
 
 
 		@BeforeClass
@@ -58,24 +58,24 @@ package com.qa.ims.persistence.domain.dao;
 		public void bCreateTest() {
 			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			String firstName = "Vinesh";
-			String surname = "Ghela";
-			String address = "42 The pines, Jordan";
-			String email = "vin@gmail.com";
-			String password = "werty123";
-			OrderLine orderLine = new OrderLine(1L, firstName, surname, address, email, password);
-			String firstName2 = "James";
-			String surname2 = "Peach";
-			String address2 = "3a forbes Row, Darlington";
-			String email2 = "jamesP@hotmail.com";
-			String password2 = "wer56dfdg";
-			OrderLine orderLine2 = new OrderLine(2L, firstName2, surname2, address2, email2, password2);
-			String firstName3 = "Bob";
-			String surname3 = "Perry";
-			String address3 = "456 Down the Lane";
-			String email3 = "bobbyP@aol.com";
-			String password3 = "gjoghrgwgh";
-			OrderLine orderLine3 = new OrderLine(3L, firstName3, surname3, address3, email3, password3);
+			Long fkCustomerId = 1L;
+			Long fkOrderId = 1L;
+			Long fkProductId = 1L;
+			Long productQty = 2L;
+			double productTotal = 15.00;
+			OrderLine orderLine = new OrderLine(1L, fkCustomerId, fkOrderId, fkProductId, productQty, productTotal);
+			Long fkCustomerId2 = 2L;
+			Long fkOrderId2 = 2L;
+			Long fkProductId2 = 2L;
+			Long productQty2 = 3L;
+			double productTotal2 = 10.00;
+			OrderLine orderLine2 = new OrderLine(2L, fkCustomerId2, fkOrderId2, fkProductId2, productQty2, productTotal2);
+			Long fkCustomerId3 = 3L;
+			Long fkOrderId3 = 3L;
+			Long fkProductId3 = 3L;
+			Long productQty3 = 4L;
+			double productTotal3 = 5.00;
+			OrderLine orderLine3 = new OrderLine(3L, fkCustomerId3, fkOrderId3, fkProductId3, productQty3, productTotal3);
 			assertEquals(orderLine, orderLineDaoMysql.create(orderLine));
 			assertEquals(orderLine2, orderLineDaoMysql.create(orderLine2));
 			assertEquals(orderLine3, orderLineDaoMysql.create(orderLine3));
@@ -86,9 +86,9 @@ package com.qa.ims.persistence.domain.dao;
 			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
 			List<OrderLine> orderLines = new ArrayList<>();
-			orderLines.add(new OrderLine(1L, "Vinesh", "Ghela", "42 The pines, Jordan", "vin@gmail.com", "werty123"));
-			orderLines.add(new OrderLine(2L, "James", "Peach", "3a forbes Row, Darlington", "jamesPeachy@hotmail.com", "wer56dfdg"));
-			orderLines.add(new OrderLine(3L, "Bob", "Perry", "456 Down the Lane",  "bobbyP@aol.com", "gjoghrgwgh"));
+			orderLines.add(new OrderLine(1L, 1L, 1L, 1L, 2L, 15.00));
+			orderLines.add(new OrderLine(2L, 2L, 2L, 2L, 3L, 10.00));
+			orderLines.add(new OrderLine(3L, 3L, 3L, 3L, 3L, 5.00));
 			
 			assertNotNull(orderLineDaoMysql.readAll());
 		}
@@ -97,7 +97,7 @@ package com.qa.ims.persistence.domain.dao;
 		public void dReadLatestTest() {
 			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			OrderLine orderLine = new OrderLine(3L, "Bob", "Perry", "456 Down the Lane",  "bobbyP@aol.com", "gjoghrgwgh");
+			OrderLine orderLine = new OrderLine(3L,3L, 3L, 3L, 3L, 5.00 );
 			assertEquals(orderLine, orderLineDaoMysql.readLatest());
 		}
 
@@ -105,7 +105,7 @@ package com.qa.ims.persistence.domain.dao;
 		public void eReadOrderLineTest() {
 			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-			OrderLine orderLine = new OrderLine(2L, "James", "Peach", "3a forbes Row, Darlington", "jamesPeachy@hotmail.com", "wer56dfdg");
+			//OrderLine orderLine = new OrderLine(2L, 2L, 2L, 2L, 3L, 10.00);
 			assertNotNull(orderLineDaoMysql.readOrderLine(2L));
 		}
 
@@ -114,12 +114,12 @@ package com.qa.ims.persistence.domain.dao;
 			OrderLineDaoMysql orderLineDaoMysql = new OrderLineDaoMysql(
 					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
 			Long id = 1L;
-			String firstName = "Vinesh";
-			String surname = "Ghela";
-			String address = "42 The pines, Jordan";
-			String email = "vin@gmail.com";
-			String password = "werty123";
-			OrderLine orderLine = new OrderLine((id), firstName, surname, address, email, password);
+			Long fkCustomerId = 1L;
+			Long fkOrderId = 1L;
+			Long fkProductId = 1L;
+			Long productQty = 2L;
+			double productTotal = 15.00;
+			OrderLine orderLine = new OrderLine((id), fkCustomerId, fkOrderId, fkProductId, productQty, productTotal);
 			assertEquals(orderLine, orderLineDaoMysql.update(orderLine));
 		}
 
@@ -131,14 +131,14 @@ package com.qa.ims.persistence.domain.dao;
 			String id = "3";
 			orderLineDaoMysql.delete(Long.parseLong(id));
 			List<OrderLine> orderLines = new ArrayList<>();
-			orderLines.add(new OrderLine(3L, "Bob", "Perry", "456 Down the Lane",  "bobbyP@aol.com", "gjoghrgwgh"));
+			orderLines.add(new OrderLine(3L, 3L, 3L, 3L, 3L, 5.00));
 			assertNotNull(orderLineDaoMysql.readAll());
 		}
 
 		@AfterClass
 		public static void cleanDB() {
 
-			try (Connection connection = DriverManager.getConnection(jdbcurl, username, password);
+			try (Connection connection = DriverManager.getConnection(jdbcurl, username, productTotal);
 					Statement statement = connection.createStatement();) {
 				statement.executeUpdate("drop table orderLines");
 			} catch (Exception e) {

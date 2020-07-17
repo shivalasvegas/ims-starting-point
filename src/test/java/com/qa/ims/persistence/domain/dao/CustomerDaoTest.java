@@ -109,7 +109,7 @@ public class CustomerDaoTest {
 	public void eReadCustomerTest() {
 		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(
 				"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-		Customer customer = new Customer(2L, "James", "Peach", "3a forbes Row, Darlington", "jamesPeachy@hotmail.com", "wer56dfdg");
+		//Customer customer = new Customer(2L, "James", "Peach", "3a forbes Row, Darlington", "jamesPeachy@hotmail.com", "wer56dfdg");
 		assertNotNull(customerDaoMysql.readCustomer(2L));
 	}
 

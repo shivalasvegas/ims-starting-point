@@ -13,7 +13,7 @@ public class OrderController implements CrudController<Order>{
 public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 	
 	private CrudServices<Order> orderService;
-	
+	private Order order;
 	public OrderController(CrudServices<Order> orderService) {
 		this.orderService = orderService;
 	}
@@ -82,7 +82,7 @@ public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 	public void calc() {
 		LOGGER.info("Please enter the id of the order you would like to calculate");
 		Long order_id = Long.valueOf(getInput());
-		orderService.calc(order_id);
+		orderService.calc(order_id, order);
 	}
 	
 }

@@ -3,10 +3,8 @@ package com.qa.ims.persistence.domain;
 
 
 public class OrderLine {
-	
-	
-	
-	// variables
+
+			// variables
 			private Long orderLine_id;
 			private Long fkCustomerId;
 			private Long fkOrderId;

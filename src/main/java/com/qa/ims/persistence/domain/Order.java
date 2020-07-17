@@ -80,7 +80,7 @@ public class Order {
 		//String-to-String
 		@Override
 		public String toString() {
-			return "Order:: order id:" + orderId + "  order date:" + orderDate;
+			return "Order:: order id:" + orderId + "  order date:" + orderDate + "  order total: " + getOrderTotal();
 		}
 		
 		@Override

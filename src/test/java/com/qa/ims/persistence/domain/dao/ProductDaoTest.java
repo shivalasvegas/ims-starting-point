@@ -59,26 +59,26 @@ package com.qa.ims.persistence.domain.dao;
 					"src/test/resources/sql-schema.sql");
 		}
 
-//		@Test
-//		public void bCreateTest() {
-//			ProductDaoMysql productDaoMysql = new ProductDaoMysql(
-//					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-//			String productName = "Bertie";
-//			Long categoryId = 2L;
-//			double productPrice = 15.00;
-//			Product product = new Product(1L, productName, productPrice, categoryId);
-//			String productName2 = "Flo";
-//			Long categoryId2 = 3L;
-//			double productPrice2 = 5.00;
-//			Product product2 = new Product(2L, productName2, productPrice2, categoryId2);
-//			String productName3 = "Harvey";
-//			Long categoryId3 = 1L;
-//			double productPrice3 = 25.00;
-//			Product product3 = new Product(3L, productName3, productPrice3, categoryId3);;
-//			assertEquals(product, productDaoMysql.create(product));
-//			assertEquals(product2, productDaoMysql.create(product2));
-//			assertEquals(product3, productDaoMysql.create(product3));
-//		}
+		@Test
+		public void bCreateTest() {
+			ProductDaoMysql productDaoMysql = new ProductDaoMysql(
+					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
+			String productName = "Bertie";
+			Long categoryId = 2L;
+			double productPrice = 15.00;
+			Product product = new Product(1L, productName, productPrice, categoryId);
+			String productName2 = "Flo";
+			Long categoryId2 = 3L;
+			double productPrice2 = 5.00;
+			Product product2 = new Product(2L, productName2, productPrice2, categoryId2);
+			String productName3 = "Harvey";
+			Long categoryId3 = 1L;
+			double productPrice3 = 25.00;
+			Product product3 = new Product(3L, productName3, productPrice3, categoryId3);;
+			assertEquals(product, productDaoMysql.create(product));
+			assertEquals(product2, productDaoMysql.create(product2));
+			assertEquals(product3, productDaoMysql.create(product3));
+		}
 
 		@Test
 		public void cReadAllTest() {
@@ -92,37 +92,34 @@ package com.qa.ims.persistence.domain.dao;
 			assertNotNull(productDaoMysql.readAll());
 		}
 
-//		@Test
-//		public void dReadLatestTest() {
-//			ProductDaoMysql productDaoMysql = new ProductDaoMysql(
-//					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-//			//Product product = new Product(3L, "Harvey",25.00, 1L);
-//			assertNotNull(productDaoMysql.readLatest());
-//		}
-//
-//		@Test
-//		public void eReadProductTest() {
-//			ProductDaoMysql productDaoMysql = new ProductDaoMysql(
-//					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-//			//Product product = new Product(2L, "Flo", 5.00, 3L);
-//			assertNotNull(productDaoMysql.readProduct(2L));
-//		}
-//
-//	//
-////		/**
-////		 * 
-////		 */
-//		@Test
-//		public void fUpdateTest() {
-//			ProductDaoMysql productDaoMysql = new ProductDaoMysql(
-//					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
-//			Long id = 1L;
-//			String productName = "Bertie";
-//			Long categoryId = 2L;
-//			double productPrice = 15.00;
-//			Product product = new Product((id), productName, productPrice, categoryId );
-//			assertNotNull(productDaoMysql.update(product));
-//		}
+		@Test
+		public void dReadLatestTest() {
+			ProductDaoMysql productDaoMysql = new ProductDaoMysql(
+					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
+			//Product product = new Product(3L, "Harvey",25.00, 1L);
+			assertNotNull(productDaoMysql.readLatest());
+		}
+
+		@Test
+		public void eReadProductTest() {
+			ProductDaoMysql productDaoMysql = new ProductDaoMysql(
+					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
+			//Product product = new Product(2L, "Flo", 5.00, 3L);
+			assertNotNull(productDaoMysql.readProduct(2L));
+		}
+
+		@Test
+		public void fUpdateTest() {
+			ProductDaoMysql productDaoMysql = new ProductDaoMysql(
+					"jdbc:mysql://34.105.145.205:3306/ims_test?serverTimezone=UTC", "root", "root");
+			Long id = 1L;
+			String productName = "Bertie";
+			Long categoryId = 2L;
+			double productPrice = 15.00;
+			Product product = new Product((id), productName, productPrice, categoryId );
+			assertNotNull(productDaoMysql.update(product));
+		}
+
 
 //		/**
 //		 * makes sure that after you delete, the entry is no longer in the database.

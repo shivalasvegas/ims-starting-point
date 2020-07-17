@@ -27,9 +27,9 @@ package com.qa.ims.persistence.domain.dao;
 	import com.qa.ims.persistence.domain.Product;
 	import com.qa.ims.services.ProductServices;
 
+	
 	@RunWith(MockitoJUnitRunner.class)
 	@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-
 	public class ProductDaoTest {
 		/**
 		 * The thing I want to fake functionality for

@@ -108,10 +108,6 @@ package com.qa.ims.persistence.domain.dao;
 			assertNotNull(productDaoMysql.readProduct(2L));
 		}
 
-	//
-//		/**
-//		 * 
-//		 */
 		@Test
 		public void fUpdateTest() {
 			ProductDaoMysql productDaoMysql = new ProductDaoMysql(

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Ims.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ForenameSurname-SoftwareMarch16</a> &gt; <a href="index.source.html" class="el_package">com.qa.ims</a> &gt; <span class="el_source">Ims.java</span></div><h1>Ims.java</h1><pre class="source lang-java linenums">package com.qa.ims;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import org.apache.log4j.Logger;
+
+import com.qa.ims.controller.Action;
+import com.qa.ims.controller.CrudController;
+import com.qa.ims.controller.CustomerController;
+import com.qa.ims.controller.OrderController;
+import com.qa.ims.controller.OrderLineController;
+import com.qa.ims.controller.ProductController;
+import com.qa.ims.persistence.dao.CustomerDaoMysql;
+import com.qa.ims.persistence.dao.ProductDaoMysql;
+import com.qa.ims.persistence.dao.OrderDaoMysql;
+import com.qa.ims.persistence.dao.OrderLineDaoMysql;
+import com.qa.ims.persistence.domain.Domain;
+import com.qa.ims.services.CustomerServices;
+import com.qa.ims.services.OrderServices;
+import com.qa.ims.services.OrderLineServices;
+import com.qa.ims.services.ProductServices;
+import com.qa.ims.utils.Utils;
+
+<span class="fc" id="L30">public class Ims {</span>
+
+<span class="fc" id="L32">	public static final Logger LOGGER = Logger.getLogger(Ims.class);</span>
+	
+	private CustomerController customerController;
+	private ProductController productController;
+	private OrderController OrderController;
+	private OrderLineController OrderLineController;
+	
+<span class="fc" id="L39">	private String checkReturn = &quot;return&quot;;</span>
+<span class="fc" id="L40">	private String checkExit = &quot;exit&quot;;</span>
+<span class="fc" id="L41">	private String checkCreate = &quot;create&quot;;</span>
+	private boolean keepGoing;
+<span class="fc" id="L43">	private boolean keepOnGoing = true;</span>
+<span class="fc" id="L44">	private boolean returnToDatabase = true;</span>
+	private String username;
+	private String password;
+
+	public void imsSystem() {
+<span class="nc" id="L49">		LOGGER.info(&quot;Please enter your username: &quot;);</span>
+<span class="nc" id="L50">		this.username = Utils.getInput();</span>
+<span class="nc" id="L51">		LOGGER.info(&quot;Pease enter your password: &quot;);</span>
+<span class="nc" id="L52">		this.password = Utils.getInput();</span>
+<span class="nc" id="L53">		keepGoing= true;</span>
+		
+		// Initialise database connection
+<span class="nc" id="L56">		init(this.username, this.password);</span>
+
+		do {
+<span class="nc" id="L59">			LOGGER.info(&quot;Which part of the database would you like to access?&quot;);</span>
+<span class="nc" id="L60">			Domain.printDomains();</span>
+
+<span class="nc" id="L62">			Domain domain = Domain.getDomain();</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">			if (Domain.getStringDomain().equals(checkExit)) {</span>
+<span class="nc" id="L64">				closeDb();</span>
+<span class="nc" id="L65">				LOGGER.info(&quot;Exiting the program ... Bye!&quot;);</span>
+<span class="nc" id="L66">				System.exit(0);</span>
+			}
+<span class="nc" id="L68">			LOGGER.info(&quot;What would you like to do with &quot; + domain.name().toLowerCase() + &quot;:&quot;);</span>
+
+<span class="nc" id="L70">			Action.printActions();</span>
+<span class="nc" id="L71">			Action action = Action.getAction();</span>
+
+<span class="nc bnc" id="L73" title="All 5 branches missed.">			switch (domain) {</span>
+			case CUSTOMER:
+<span class="nc" id="L75">				this.customerController = new CustomerController(</span>
+						new CustomerServices(new CustomerDaoMysql(username, password)));
+<span class="nc" id="L77">				keepGoing=true;</span>
+<span class="nc" id="L78">				domainLoop(customerController, action);</span>
+
+<span class="nc" id="L80">				break;</span>
+			case ITEM:
+<span class="nc" id="L82">				this.productController = new ProductController(</span>
+						new ProductServices(new ProductDaoMysql(username, password)));
+<span class="nc" id="L84">				keepGoing=true;</span>
+<span class="nc" id="L85">				domainLoop(productController, action);</span>
+				
+<span class="nc" id="L87">				break;</span>
+			case ORDER:
+<span class="nc" id="L89">				this.OrderController = new OrderController(</span>
+						new OrderServices(new OrderDaoMysql(username, password)));
+				do {
+
+<span class="nc bnc" id="L93" title="All 2 branches missed.">						if (Action.getStringAction().equals(checkCreate)) {</span>
+<span class="nc" id="L94">						ProductController productControl = new ProductController(</span>
+								new ProductServices(new ProductDaoMysql(username, password)));
+
+<span class="nc" id="L97">						this.OrderLineController = new OrderLineController(</span>
+								new OrderLineServices(new OrderLineDaoMysql(username, password)));
+<span class="nc" id="L99">						keepGoing=true;</span>
+<span class="nc" id="L100">						doAction(OrderController, action);</span>
+						
+						do {
+<span class="nc" id="L103">							LOGGER.info(&quot;Choose from our range of amazing products!&quot;);</span>
+<span class="nc" id="L104">							action = Action.getReadAction();</span>
+<span class="nc" id="L105">							keepOnGoing=true;</span>
+<span class="nc" id="L106">							doAction(productControl, action);</span>
+<span class="nc" id="L107">							LOGGER.info(&quot;Redirecting you for more order information ...&quot;);</span>
+<span class="nc" id="L108">							LOGGER.info(&quot;Please enter your detailed order choice below:&quot;);	</span>
+<span class="nc" id="L109">							Action.printActions();</span>
+<span class="nc" id="L110">							action = Action.getAction();</span>
+							
+<span class="nc bnc" id="L112" title="All 4 branches missed.">							if (!Action.getStringAction().equals(checkExit) || !Action.getStringAction().equals(checkReturn)) {</span>
+<span class="nc" id="L113">								doAction(OrderLineController, action);</span>
+							}
+							
+<span class="nc bnc" id="L116" title="All 2 branches missed.">							if (Action.getStringAction().equals(checkExit)) {</span>
+<span class="nc" id="L117">								closeDb();</span>
+<span class="nc" id="L118">								LOGGER.info(&quot;Exiting the program ... Bye!&quot;);</span>
+<span class="nc" id="L119">								System.exit(0);</span>
+							}
+							
+<span class="nc bnc" id="L122" title="All 2 branches missed.">							if (Action.getStringAction().equals(checkReturn)) {</span>
+<span class="nc" id="L123">								LOGGER.info(&quot;Returning to order selection ... &quot;);</span>
+<span class="nc" id="L124">								keepOnGoing = false;</span>
+							}
+						
+<span class="nc bnc" id="L127" title="All 2 branches missed.">						} while (keepOnGoing);</span>
+
+					}
+					
+<span class="nc bnc" id="L131" title="All 6 branches missed.">					if (!Action.getStringAction().equals(checkExit) || !Action.getStringAction().equals(checkReturn) || !Action.getStringAction().equals(checkCreate)) {</span>
+<span class="nc" id="L132">						doAction(OrderController, action);</span>
+<span class="nc" id="L133">						LOGGER.info(&quot;Please make another selection ... &quot;);</span>
+<span class="nc" id="L134">						Action.printActions();</span>
+<span class="nc" id="L135">						action = Action.getAction();</span>
+					}
+					
+					
+					
+<span class="nc bnc" id="L140" title="All 2 branches missed.">					if (Action.getStringAction().equals(checkExit)) {</span>
+<span class="nc" id="L141">						closeDb();</span>
+<span class="nc" id="L142">						LOGGER.info(&quot;Exiting the program ... Bye!&quot;);</span>
+<span class="nc" id="L143">						System.exit(0);</span>
+
+					}
+					
+					
+					
+<span class="nc bnc" id="L149" title="All 4 branches missed.">					if (Action.getStringAction().equals(checkReturn)&amp;&amp;!keepOnGoing) {</span>
+<span class="nc" id="L150">						LOGGER.info(&quot;Returning to the database selection ... &quot;);</span>
+<span class="nc" id="L151">						keepGoing = false;</span>
+					}
+					
+					
+
+<span class="nc bnc" id="L156" title="All 2 branches missed.">				} while (keepGoing);</span>
+				
+<span class="nc" id="L158">				break;</span>
+			case EXIT:
+<span class="nc" id="L160">				break;</span>
+			default:
+<span class="nc" id="L162">				returnToDatabase = false;</span>
+				break;
+			}
+<span class="nc bnc" id="L165" title="All 2 branches missed.">		} while (returnToDatabase);</span>
+<span class="nc" id="L166">	}</span>
+
+	public void doAction(CrudController&lt;?&gt; crudController, Action action) {
+
+<span class="nc bnc" id="L170" title="All 8 branches missed.">		switch (action) {</span>
+		case CREATE:
+<span class="nc" id="L172">			crudController.create();</span>
+<span class="nc" id="L173">			break;</span>
+		case CALC:
+<span class="nc" id="L175">			crudController.calc();</span>
+<span class="nc" id="L176">			break;</span>
+		case READ:
+<span class="nc" id="L178">			crudController.readAll();</span>
+<span class="nc" id="L179">			break;</span>
+		case UPDATE:
+<span class="nc" id="L181">			crudController.update();</span>
+<span class="nc" id="L182">			break;</span>
+		case DELETE:
+<span class="nc" id="L184">			crudController.delete();</span>
+<span class="nc" id="L185">			break;</span>
+		case RETURN:
+<span class="nc" id="L187">			break;</span>
+		case EXIT:
+<span class="nc" id="L189">			break;</span>
+		default:
+			break;
+		}
+
+<span class="nc" id="L194">	}</span>
+
+	public void domainLoop(CrudController&lt;?&gt; crudController, Action action) {
+		
+		do {
+
+<span class="nc bnc" id="L200" title="All 4 branches missed.">			if (!Action.getStringAction().equals(checkExit) || !Action.getStringAction().equals(checkReturn)) {</span>
+<span class="nc" id="L201">				doAction(crudController, action);</span>
+<span class="nc" id="L202">				LOGGER.info(&quot;Please make another selection ... &quot;);</span>
+<span class="nc" id="L203">				Action.printActions();</span>
+<span class="nc" id="L204">				action = Action.getAction();</span>
+			}
+			
+<span class="nc bnc" id="L207" title="All 2 branches missed.">			if (Action.getStringAction().equals(checkExit)) {</span>
+<span class="nc" id="L208">				closeDb();</span>
+<span class="nc" id="L209">				LOGGER.info(&quot;Exiting the program ... Bye!&quot;);</span>
+<span class="nc" id="L210">				System.exit(0);</span>
+			}
+
+<span class="nc bnc" id="L213" title="All 2 branches missed.">				if (Action.getStringAction().equals(checkReturn)) {</span>
+<span class="nc" id="L214">				LOGGER.info(&quot;Returning to the database selection ... &quot;);</span>
+<span class="nc" id="L215">				keepGoing = false;</span>
+			}
+
+<span class="nc bnc" id="L218" title="All 2 branches missed.">		} while (keepGoing);</span>
+		
+<span class="nc" id="L220">	}</span>
+	
+	/**
+	 * To initialise the database schema. DatabaseConnectionUrl will default to
+	 * localhost.
+	 *
+	 * @param username
+	 * @param password
+	 */
+	public void init(String username, String password) {
+<span class="nc" id="L230">		init(&quot;jdbc:mysql://&quot; + Utils.MYSQL_URL + &quot;/&quot;, username, password, &quot;src/main/resources/sql-schema.sql&quot;);</span>
+<span class="nc" id="L231">	}</span>
+
+	public String readFile(String fileLocation) {
+<span class="nc" id="L234">		StringBuilder stringBuilder = new StringBuilder();</span>
+<span class="nc" id="L235">		try (BufferedReader br = new BufferedReader(new FileReader(fileLocation));) {</span>
+			String string;
+<span class="nc bnc" id="L237" title="All 2 branches missed.">			while ((string = br.readLine()) != null) {</span>
+<span class="nc" id="L238">				stringBuilder.append(string);</span>
+<span class="nc" id="L239">				stringBuilder.append(&quot;\r\n&quot;);</span>
+			}
+<span class="nc" id="L241">		} catch (IOException e) {</span>
+<span class="nc bnc" id="L242" title="All 2 branches missed.">			for (StackTraceElement ele : e.getStackTrace()) {</span>
+<span class="nc" id="L243">				LOGGER.debug(ele);</span>
+			}
+<span class="nc" id="L245">			LOGGER.error(e.getMessage());</span>
+<span class="nc" id="L246">		}</span>
+<span class="nc" id="L247">		return stringBuilder.toString();</span>
+	}
+
+	/**
+	 * To initialise the database with the schema needed to run the application
+	 */
+	public void init(String jdbcConnectionUrl, String username, String password, String fileLocation) {
+<span class="fc" id="L254">		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);</span>
+<span class="fc" id="L255">				BufferedReader br = new BufferedReader(new FileReader(fileLocation));) {</span>
+			String string;
+<span class="fc bfc" id="L257" title="All 2 branches covered.">			while ((string = br.readLine()) != null) {</span>
+<span class="fc" id="L258">				try (Statement statement = connection.createStatement();) {</span>
+<span class="fc" id="L259">					statement.executeUpdate(string);</span>
+
+				}
+			}
+<span class="nc" id="L263">		} catch (SQLException | IOException e) {</span>
+<span class="nc bnc" id="L264" title="All 2 branches missed.">			for (StackTraceElement ele : e.getStackTrace()) {</span>
+<span class="nc" id="L265">				LOGGER.debug(ele);</span>
+
+			}
+<span class="nc" id="L268">			LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L269">		}</span>
+<span class="fc" id="L270">	}</span>
+
+	/**
+	 * To close the database on user choosing EXIT
+	 */
+	public void closeDb() {
+<span class="nc" id="L276">		closeDb(&quot;jdbc:mysql://&quot; + Utils.MYSQL_URL + &quot;/&quot;, this.username, this.password);</span>
+<span class="nc" id="L277">	}</span>
+
+	public void closeDb(String jdbcConnectionUrl, String username, String password) {
+<span class="nc" id="L280">		this.username = username;</span>
+<span class="nc" id="L281">		this.password = password;</span>
+<span class="nc" id="L282">		Connection connection = null;</span>
+		try {
+<span class="nc" id="L284">			connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);</span>
+<span class="nc" id="L285">		} catch (SQLException e) {</span>
+
+<span class="nc" id="L287">			LOGGER.error(e.getMessage());</span>
+		} finally {
+			try {
+<span class="nc bnc" id="L290" title="All 2 branches missed.">				if (connection != null) {</span>
+<span class="nc" id="L291">					LOGGER.info(&quot;Exiting database...&quot;);</span>
+<span class="nc" id="L292">					connection.close();</span>
+				}
+<span class="nc" id="L294">			} catch (SQLException e) {</span>
+
+<span class="nc" id="L296">				LOGGER.error(e.getMessage());</span>
+<span class="nc" id="L297">			}</span>
+		}
+<span class="nc" id="L299">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

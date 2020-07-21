@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Test set: com.qa.ims.persistence.domain.dao.ProductDaoTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 6.629 s <<< FAILURE! - in com.qa.ims.persistence.domain.dao.ProductDaoTest
+com.qa.ims.persistence.domain.dao.ProductDaoTest.bCreateTest  Time elapsed: 0.634 s  <<< FAILURE!
+java.lang.AssertionError: expected:<Product [productId=1, productName=Bertie, productPrice=15.0]> but was:<null>
+	at com.qa.ims.persistence.domain.dao.ProductDaoTest.bCreateTest(ProductDaoTest.java:78)
+
+com.qa.ims.persistence.domain.dao.ProductDaoTest.dReadLatestTest  Time elapsed: 0.618 s  <<< FAILURE!
+java.lang.AssertionError
+	at com.qa.ims.persistence.domain.dao.ProductDaoTest.dReadLatestTest(ProductDaoTest.java:100)
+
+com.qa.ims.persistence.domain.dao.ProductDaoTest.eReadProductTest  Time elapsed: 0.629 s  <<< FAILURE!
+java.lang.AssertionError
+	at com.qa.ims.persistence.domain.dao.ProductDaoTest.eReadProductTest(ProductDaoTest.java:108)
+
+com.qa.ims.persistence.domain.dao.ProductDaoTest.fUpdateTest  Time elapsed: 1.291 s  <<< FAILURE!
+java.lang.AssertionError
+	at com.qa.ims.persistence.domain.dao.ProductDaoTest.fUpdateTest(ProductDaoTest.java:120)
+

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ForenameSurname-SoftwareMarch16</a> &gt; <a href="index.source.html" class="el_package">com.qa.ims.controller</a> &gt; <span class="el_source">ProductController.java</span></div><h1>ProductController.java</h1><pre class="source lang-java linenums">package com.qa.ims.controller;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+
+import com.qa.ims.persistence.domain.Product;
+import com.qa.ims.services.CrudServices;
+import com.qa.ims.utils.Utils;
+
+/**
+ * Takes in product details for CRUD functionality
+ *
+ */
+public class ProductController implements CrudController&lt;Product&gt;{
+	
+<span class="fc" id="L17">public static final Logger LOGGER = Logger.getLogger(ProductController.class);</span>
+	
+	private CrudServices&lt;Product&gt; productService;
+	
+<span class="fc" id="L21">	public ProductController(CrudServices&lt;Product&gt; productService) {</span>
+<span class="fc" id="L22">		this.productService = productService;</span>
+<span class="fc" id="L23">	}</span>
+	
+
+	String getInput() {
+<span class="nc" id="L27">		return Utils.getInput();</span>
+	}
+	
+	/**
+	 * Reads all products to the logger
+	 */
+	@Override
+	public List&lt;Product&gt; readAll() {
+<span class="nc" id="L35">		List&lt;Product&gt; products = productService.readAll();</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">		for(Product product: products) {</span>
+<span class="nc" id="L37">			LOGGER.info(product.toString());</span>
+<span class="nc" id="L38">		}</span>
+<span class="nc" id="L39">		return products;</span>
+	}
+
+	/**
+	 * Creates a product by taking in user input
+	 */
+	@Override
+	public Product create() {
+<span class="nc" id="L47">		LOGGER.info(&quot;Please enter the product name&quot;);</span>
+<span class="nc" id="L48">		String product_name = getInput();</span>
+<span class="nc" id="L49">		LOGGER.info(&quot;Please enter the product price&quot;);</span>
+<span class="nc" id="L50">		double product_price = Double.valueOf(getInput());	</span>
+<span class="nc" id="L51">		LOGGER.info(&quot;Please enter the category id&quot;);</span>
+<span class="nc" id="L52">		Long fk_category_id = Long.valueOf(getInput());</span>
+<span class="nc" id="L53">		Product product = productService.create(new Product(product_name, product_price, fk_category_id));</span>
+<span class="nc" id="L54">		LOGGER.info(&quot;Product created&quot;);</span>
+<span class="nc" id="L55">		return product;</span>
+	}
+
+	/**
+	 * Updates an existing product by taking in user input
+	 */
+	@Override
+	public Product update() {
+<span class="nc" id="L63">		LOGGER.info(&quot;Please enter the id of the product you would like to update&quot;);</span>
+<span class="nc" id="L64">		Long product_id = Long.valueOf(getInput());</span>
+		
+<span class="nc" id="L66">		LOGGER.info(&quot;Please enter the product name&quot;);</span>
+<span class="nc" id="L67">		String product_name = getInput();</span>
+<span class="nc" id="L68">		LOGGER.info(&quot;Please enter the product price&quot;);</span>
+<span class="nc" id="L69">		double product_price = Double.valueOf(getInput());</span>
+<span class="nc" id="L70">		LOGGER.info(&quot;Please enter the category id&quot;);</span>
+<span class="nc" id="L71">		Long fk_category_id = Long.valueOf(getInput());</span>
+<span class="nc" id="L72">		Product product = productService.update(new Product(product_id, product_name, product_price, fk_category_id));</span>
+<span class="nc" id="L73">		LOGGER.info(&quot;Product Updated&quot;);</span>
+<span class="nc" id="L74">		return product;</span>
+	}
+
+	/**
+	 * Deletes an existing product by the id of the product
+	 */
+	@Override
+	public void delete() {
+<span class="fc" id="L82">		LOGGER.info(&quot;Please enter the id of the product you would like to delete&quot;);</span>
+<span class="fc" id="L83">		Long product_id = Long.valueOf(getInput());</span>
+<span class="fc" id="L84">		productService.delete(product_id);</span>
+<span class="fc" id="L85">	}</span>
+
+
+//	@Override
+//	public void calc() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+	@Override
+	public Product calc() {
+<span class="nc" id="L95">		return null;</span>
+		// TODO Auto-generated method stub
+		
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

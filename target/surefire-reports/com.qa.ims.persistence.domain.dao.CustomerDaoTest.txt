@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.qa.ims.persistence.domain.dao.CustomerDaoTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.022 s - in com.qa.ims.persistence.domain.dao.CustomerDaoTest
